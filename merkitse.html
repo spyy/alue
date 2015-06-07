@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Talleta merkintä puhelimeen</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+    var area = getURLParam(window.location, "key");
+    var door = getURLParam(window.location, "door");
+    var value = getURLParam(window.location, "value");
+
+    if (typeof(Storage) != "undefined") {
+        var key = area + "__" + door;
+        localStorage.setItem(key, value);
+    } else {
+        alert("Selaimesi ei tue tallennusta");
+    }                        
+
+    function getURLParam (oTarget, sVar) {            
+        return decodeURI(oTarget.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+    }
+
+    window.location.assign("alue.html?key=" + area);
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="field service">
+    <meta name="author" content="sami pyy">
+    <link rel="icon" href="icon/favicon.ico">
+    
+    <title>Alue</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/cover.css" rel="stylesheet" type="text/css" />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+        
+    <script>
+        function getURLParam (oTarget, sVar) {            
+            return decodeURI(oTarget.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+        }
+    </script>
+  </head>
+
+  <body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">alueet.net</h3>
+              <nav>
+                <ul class="nav masthead-nav">                  
+                  <li><a href="uusialue.html">Uusi alue</a></li>
+                  <li><a href="alueet.html">Alueet</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="inner cover">
+                <div class="list-group lead" id="alueet">                                                            
+                    <!-- filled in script -->                        
+                </div>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+                <p>sami.pyy@gmail.com</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+      
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="myModal">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">          
+          <div class="modal-body">
+            <div class="list-group lead" id="koodit">
+                <!-- filled in script -->
+            </div>
+          </div>          
+        </div>
+      </div>
+    </div>
+    
+    <script>
+        
+        var key = getURLParam(window.location, "key");
+        var door = getURLParam(window.location, "door");        
+                      
+        if (typeof(Storage) != "undefined") {
+            if (key.search("__") == -1) {               
+                printArea(key);
+                printColors(key, door);
+            } else {
+                showModal(key);
+            }            
+        } else {
+            alert("Selaimesi ei tue tietokantaa");
+        }    
+                
+        function printColors(key, door) {
+            var inner = "";    
+            
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-success' class='list-group-item list-group-item-success'>success</a>";
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-info' class='list-group-item list-group-item-info'>info</a>";
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-warning' class='list-group-item list-group-item-warning'>warning</a>";
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-danger' class='list-group-item list-group-item-danger'>danger</a>";
+              
+            document.getElementById("koodit").innerHTML += inner;
+        }
+                
+        function printAreaFromTo(key, from, to) {            
+            var inner = "";    
+            
+            var i;
+            for (i = from; i <= to; i++) {
+                var color = window.localStorage.getItem(key + "__" + i);              
+                inner += "<a href='modaali.html?key=" + key + "&door=" + i + "' class='list-group-item " + color + "' data-target='#myModal' data-toggle='modal'>" + i + "</a>";                
+            }
+            
+            document.getElementById("alueet").innerHTML += inner;            
+        }
+        
+        function printArea(key) {
+            var inner = "<a href='#' class='list-group-item active'>" + key + "</a>";
+            document.getElementById("alueet").innerHTML += inner;
+            
+            var from = window.localStorage.getItem(key);
+            var to = window.localStorage.getItem(key + "_to");
+            printAreaFromTo(key, from, to);
+        }      
+                        
+    </script>          
+    
+    <script>$(window).load(function(){$('#myModal').modal('show');});</script>
+    
+    
+  </body>
+</html>
