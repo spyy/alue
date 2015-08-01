@@ -45,7 +45,7 @@
           </div>
 
           <div class="inner cover">
-                <div class="list-group lead" id="alueet">                                                            
+                <div class="list-group lead text-left" id="alueet">                                                            
                     <!-- filled in script -->                        
                 </div>
           </div>
@@ -94,21 +94,34 @@
         function printColors(key, door) {
             var inner = "";    
             
-            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-success' class='list-group-item list-group-item-success'>success</a>";
-            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-info' class='list-group-item list-group-item-info'>info</a>";
-            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-warning' class='list-group-item list-group-item-warning'>warning</a>";
-            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-danger' class='list-group-item list-group-item-danger'>danger</a>";
-              
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-success' class='list-group-item list-group-item-success'>Vihreä</a>";
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-info' class='list-group-item list-group-item-info'>Sininen</a>";
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-warning' class='list-group-item list-group-item-warning'>Keltainen</a>";
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-danger' class='list-group-item list-group-item-danger'>Punainen</a>";
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=empty' class='list-group-item'>Tyhjä</a>";            
+                        
+        
             document.getElementById("koodit").innerHTML += inner;
         }
                 
         function printAreaFromTo(key, from, to) {            
-            var inner = "";    
+            var inner = "";
             
             var i;
             for (i = from; i <= to; i++) {
-                var color = window.localStorage.getItem(key + "__" + i);              
-                inner += "<a href='modaali.html?key=" + key + "&door=" + i + "' class='list-group-item " + color + "' data-target='#myModal' data-toggle='modal'>" + i + "</a>";                
+                var item = window.localStorage.getItem(key + "__" + i);
+                var values = item.split(" ");                
+                
+                if (values.length === 1) {
+                    inner += "<a href='modaali.html?key=" + key + "&door=" + i + "' class='list-group-item " + item + "'>" + i + "</a>";                                        
+                } else {
+                    var color = values[0];
+                    var date = values[1];
+                    var time = values[2];
+                    var content = i + "<span class='badge'>" + date + " " + time + "</span>";
+                    inner += "<a href='modaali.html?key=" + key + "&door=" + i + "' class='list-group-item " + color + "'>" + content + "</a>";
+                    
+                }                
             }
             
             document.getElementById("alueet").innerHTML += inner;            

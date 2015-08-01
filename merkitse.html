@@ -8,10 +8,15 @@
 <script>
     var area = getURLParam(window.location, "key");
     var door = getURLParam(window.location, "door");
-    var value = getURLParam(window.location, "value");
+    var color = getURLParam(window.location, "value");    
+    var dateAndTime = getDateAndTime();        
 
-    if (typeof(Storage) != "undefined") {
+    if (typeof(Storage) !== "undefined") {
         var key = area + "__" + door;
+        var value = "";
+        if (color !== "empty") {
+            value = color + " " + dateAndTime;
+        }
         localStorage.setItem(key, value);
     } else {
         alert("Selaimesi ei tue tallennusta");
@@ -19,6 +24,16 @@
 
     function getURLParam (oTarget, sVar) {            
         return decodeURI(oTarget.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+    }
+    
+    function getDateAndTime() {
+        var d = new Date();
+        var date = d.getDate();
+        var month = d.getMonth() + 1;
+        var hours = d.getHours();
+        var minutes = d.getMinutes();
+        
+        return date + "." + month + " " + hours + ":" + minutes;
     }
 
     window.location.assign("alue.html?key=" + area);

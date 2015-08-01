@@ -40,8 +40,8 @@
           </div>
 
           <div class="inner cover">
-                <div class="list-group lead" id="alueet">
-                    <!-- filled in script -->                    
+                <div class="list-group lead text-left" id="alueet">
+                    <!-- filled in script -->
                 </div>
           </div>
 
@@ -57,9 +57,7 @@
 
     </div>
               
-    <script>
-        
-        //window.localStorage.clear();
+    <script>                
         
         var key = getURLParam(window.location, "key");
                         
@@ -78,12 +76,23 @@
         }
                 
         function printAreaFromTo(key, from, to) {            
-            var inner = "";    
+            var inner = "";
             
             var i;
             for (i = from; i <= to; i++) {
-                var color = window.localStorage.getItem(key + "__" + i);              
-                inner += "<a href='modaali.html?key=" + key + "&door=" + i + "' class='list-group-item " + color + "'>" + i + "</a>";                
+                var item = window.localStorage.getItem(key + "__" + i);
+                var values = item.split(" ");                
+                
+                if (values.length === 1) {
+                    inner += "<a href='modaali.html?key=" + key + "&door=" + i + "' class='list-group-item " + item + "'>" + i + "</a>";                                        
+                } else {
+                    var color = values[0];
+                    var date = values[1];
+                    var time = values[2];
+                    var content = i + "<span class='badge'>" + date + " " + time + "</span>";
+                    inner += "<a href='modaali.html?key=" + key + "&door=" + i + "' class='list-group-item " + color + "'>" + content + "</a>";
+                    
+                }                
             }
             
             document.getElementById("alueet").innerHTML += inner;            
