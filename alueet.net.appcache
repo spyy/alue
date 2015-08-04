@@ -1,0 +1,31 @@
+CACHE MANIFEST
+# 2015-08-04:v1
+
+
+CACHE:
+index.html
+alue.html
+alueet.html
+merkitse.html
+modaali.html
+poista.html
+talleta.html
+uusi.html
+css/bootstrap-theme.css
+css/bootstrap-theme.min.css
+css/bootstrap.css
+css/bootstrap.min.css
+css/cover.css
+fonts/glyphicons-halflings-regular.eot
+fonts/glyphicons-halflings-regular.svg
+fonts/glyphicons-halflings-regular.ttf
+fonts/glyphicons-halflings-regular.woff
+fonts/glyphicons-halflings-regular.woff2
+https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js
+https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js
+
+
+NETWORK:
+
+
+FALLBACK:

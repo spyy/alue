@@ -1,20 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" manifest="alueet.net.appcache">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="field service">
-    <meta name="author" content="sami pyy">
-    <link rel="icon" href="icon/favicon.ico">
     
     <title>Alue</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <link href="css/cover.css" rel="stylesheet" type="text/css"/>
-    
-    
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="css/cover.css" rel="stylesheet" type="text/css" />    
     
   </head>
 
@@ -60,13 +54,6 @@
 
     </div>
       
-      <div class="modal fade bs-example-modal-sm" id="uusiAlue" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            ...
-          </div>
-        </div>
-      </div>
 
     <script>
         var innerHTML = areas();
@@ -81,12 +68,7 @@
                 var item = window.localStorage.getItem(key);
                 
                 if (key.search("_") == -1) {
-                    //innerHTML += "<li><a href='#' onclick='alert(hei mualima);'>" + key + "</a></li>";
-                    
-                    //innerHTML += "<a class='list-group-item' href='#' onclick='alert(hei mualima);'>" + key + "</a>";
-                    
                     innerHTML += "<p><a href='alue.html?key=" + key + "' class='btn btn-lg btn-default'>" + key + "</a></p>";
-
                 }
             }
             
@@ -110,10 +92,5 @@
         }    
     </script> 
       
-      
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    
   </body>
 </html>
