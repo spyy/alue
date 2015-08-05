@@ -11,18 +11,10 @@ modaali.html
 poista.html
 talleta.html
 uusi.html
-css/bootstrap-theme.css
-css/bootstrap-theme.min.css
-css/bootstrap.css
-css/bootstrap.min.css
-css/cover.css
-fonts/glyphicons-halflings-regular.eot
-fonts/glyphicons-halflings-regular.svg
-fonts/glyphicons-halflings-regular.ttf
-fonts/glyphicons-halflings-regular.woff
-fonts/glyphicons-halflings-regular.woff2
+bootstrap/css/bootstrap.min.css
+bootstrap/css/cover.css
+bootstrap/js/bootstrap.min.js
 https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js
-https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js
 
 
 NETWORK:
