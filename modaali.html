@@ -60,7 +60,11 @@
     <!-- Modal -->
     <div class="modal fade bs-example-modal-sm" id="myModal">
       <div class="modal-dialog modal-sm">
-        <div class="modal-content">          
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="otsikko" style="color:#325e60"></h4>
+            </div>
           <div class="modal-body">
             <div class="list-group lead" id="koodit">
                 <!-- filled in script -->
@@ -75,18 +79,14 @@
         var key = getURLParam(window.location, "key");
         var door = getURLParam(window.location, "door");        
                       
-        if (typeof(Storage) != "undefined") {
-            if (key.search("__") == -1) {               
-                printArea(key);
-                printColors(key, door);
-            } else {
-                showModal(key);
-            }            
+        if (typeof(Storage) !== "undefined") {
+            printArea(key);
+            printModal(key, door);
         } else {
             alert("Selaimesi ei tue tietokantaa");
         }    
                 
-        function printColors(key, door) {
+        function printModal(key, door) {
             var inner = "";    
             
             inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-success' class='list-group-item list-group-item-success'>Vihreä</a>";
@@ -95,8 +95,9 @@
             inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-danger' class='list-group-item list-group-item-danger'>Punainen</a>";
             inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=empty' class='list-group-item'>Tyhjä</a>";            
                         
-        
-            document.getElementById("koodit").innerHTML += inner;
+            document.getElementById("koodit").innerHTML = inner;
+            
+            document.getElementById("otsikko").innerHTML = key + " A " + door;
         }
                 
         function printAreaFromTo(key, from, to) {            
@@ -115,7 +116,6 @@
                     var time = values[2];
                     var content = i + "<span class='badge'>" + date + " " + time + "</span>";
                     inner += "<a href='modaali.html?key=" + key + "&door=" + i + "' class='list-group-item " + color + "'>" + content + "</a>";
-                    
                 }                
             }
             
