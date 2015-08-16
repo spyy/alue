@@ -138,6 +138,11 @@ body {
   .masthead {
     position: fixed;
     top: 0;
+    max-height: 150px;
+    z-index: 9999;
+  }
+  .cover {
+      margin-top: 150px;
   }
   .mastfoot {
     position: fixed;
