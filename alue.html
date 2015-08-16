@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" manifest="alueet.net.appcache">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,9 +21,9 @@
 
         <div class="cover-container">
 
-          <div class="masthead clearfix">
+          <div class="masthead">
             <div class="inner">
-              <h3 class="masthead-brand">alueet.net</h3>
+                <h3 class="masthead-brand" id="brand">alueet.net</h3>
               <nav>
                 <ul class="nav masthead-nav">                  
                   <li><a href="uusi.html">Uusi alue</a></li>
@@ -39,16 +39,27 @@
                 </div>
           </div>
 
-          <div class="mastfoot">
-            <div class="inner">
-                <p>sami.pyy@gmail.com</p>
-            </div>
-          </div>
-
         </div>
 
       </div>
 
+    </div>
+      
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="myModal">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="otsikko" style="color:#325e60"></h4>
+            </div>
+          <div class="modal-body">
+            <div class="list-group lead" id="koodit">
+                <!-- filled in script -->
+            </div>
+          </div>          
+        </div>
+      </div>
     </div>
               
     <script>                
@@ -57,10 +68,8 @@
                         
         if (typeof(Storage) != "undefined") {
             if (key.search("__") == -1) {
-                printArea(key);
-            } else {
-                showModal(key);
-            }            
+                printArea();
+            }           
         } else {
             alert("Selaimesi ei tue tietokantaa");
         }                        
@@ -69,7 +78,7 @@
             return decodeURI(oTarget.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
         }
                 
-        function printAreaFromTo(key, from, to) {            
+        function printAreaFromTo(from, to) {            
             var inner = "";
             
             var i;
@@ -78,13 +87,13 @@
                 var values = item.split(" ");                
                 
                 if (values.length === 1) {
-                    inner += "<a href='modaali.html?key=" + key + "&door=" + i + "' class='list-group-item " + item + "'>" + i + "</a>";                                        
+                    inner += "<a href='#' class='list-group-item " + item + "' onclick='showModal(" + i + ");return false;'>" + i + "</a>";        
                 } else {
                     var color = values[0];
                     var date = values[1];
                     var time = values[2];
                     var content = i + "<span class='badge'>" + date + " " + time + "</span>";
-                    inner += "<a href='modaali.html?key=" + key + "&door=" + i + "' class='list-group-item " + color + "'>" + content + "</a>";
+                    inner += "<a href='#' class='list-group-item " + color + "' onclick='showModal(" + i + ");return false;'>" + content + "</a>";
                     
                 }                
             }
@@ -92,16 +101,39 @@
             document.getElementById("alueet").innerHTML += inner;            
         }
         
-        function printArea(key) {
+        function printArea() {
             var inner = "<a href='#' class='list-group-item active'>" + key + "</a>";
-            document.getElementById("alueet").innerHTML += inner;
+            document.getElementById("alueet").innerHTML = inner;
             
             var from = window.localStorage.getItem(key);
             var to = window.localStorage.getItem(key + "_to");
-            printAreaFromTo(key, from, to);
+            printAreaFromTo(from, to);
+        }
+        
+        function showModal(door) {
+            printModal(door);
+            $("#myModal").modal("show");
+        }
+        
+        function printModal(door) {
+            var inner = "";    
+            
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-success' class='list-group-item list-group-item-success'>Vihreä</a>";
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-info' class='list-group-item list-group-item-info'>Sininen</a>";
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-warning' class='list-group-item list-group-item-warning'>Keltainen</a>";
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-danger' class='list-group-item list-group-item-danger'>Punainen</a>";
+            inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=empty' class='list-group-item'>Tyhjä</a>";            
+                        
+            document.getElementById("koodit").innerHTML = inner;
+            
+            document.getElementById("otsikko").innerHTML = key + " A " + door;
         }
                 
-    </script> 
+    </script>
+    
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
       
   </body>
 </html>
