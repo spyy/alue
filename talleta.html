@@ -6,12 +6,12 @@
 <meta charset="UTF-8">
 <script>
     var area = getURLParam(window.location, "area");
-    var from = Number(getURLParam(window.location, "from"));
-    var to = Number(getURLParam(window.location, "to"));    
-
+    var from = getURLParam(window.location, "from");
+    var to = getURLParam(window.location, "to");
+    
     if (typeof(Storage) !== "undefined") {
-        if (to < from) {
-            alert("Numeroon on pienempi kuin numerosta ");
+        if (Number(to) < Number(from)) {
+            alert("Numeroon on pienempi kuin numerosta.");
         } else {
             saveToLocalStorage(area, from, to);
         }
@@ -23,12 +23,13 @@
         return decodeURI(oTarget.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
     }
     
-    function saveToLocalStorage(name, from, to) {            
+    function saveToLocalStorage(name, from, to) {
         localStorage.setItem(name, from);
         localStorage.setItem(name + "_to", to);
             
         var i;
-        for (i = from; i <= to; i++) {
+        for (i = Number(from); i <= Number(to); i++) {
+            alert(i);
             localStorage.setItem(name + "__" + i, "");                
         }
     }

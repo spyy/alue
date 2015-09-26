@@ -78,11 +78,11 @@
             return decodeURI(oTarget.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
         }
                 
-        function printAreaFromTo(from, to) {            
+        function printAreaFromTo(from, to) {
             var inner = "";
             
             var i;
-            for (i = from; i <= to; i++) {
+            for (i = Number(from); i <= Number(to); i++) {
                 var item = window.localStorage.getItem(key + "__" + i);
                 var values = item.split(" ");                
                 
