@@ -11,7 +11,7 @@
 
     if (typeof(Storage) !== "undefined") {
         if (to < from) {
-            alert("Numeroon ei voi olla pienempi kuin numerosta.");
+            alert(to + " on pienempi kuin " + from);
         } else {
             saveToLocalStorage(area, from, to);
         }
