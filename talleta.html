@@ -6,12 +6,12 @@
 <meta charset="UTF-8">
 <script>
     var area = getURLParam(window.location, "area");
-    var from = getURLParam(window.location, "from");
-    var to = getURLParam(window.location, "to");    
+    var from = Number(getURLParam(window.location, "from"));
+    var to = Number(getURLParam(window.location, "to"));    
 
     if (typeof(Storage) !== "undefined") {
         if (to < from) {
-            alert(to + " on pienempi kuin " + from);
+            alert("Numeroon on pienempi kuin numerosta ");
         } else {
             saveToLocalStorage(area, from, to);
         }
