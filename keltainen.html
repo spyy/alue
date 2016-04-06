@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<title>Talleta merkintä puhelimeen</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+    var area = getURLParam(window.location, "key");
+    var door = getURLParam(window.location, "door");
+    var magazines = getURLParam(window.location, "magazines");
+    var tracts = getURLParam(window.location, "tracts");
+    var color = "list-group-item-warning";
+    var dateAndTime = getDateAndTime();        
+
+    if (typeof(Storage) !== "undefined") {
+        var key = area + "__" + door;
+        var value = color + " " + dateAndTime + " " + magazines + " " + tracts;
+        localStorage.setItem(key, value);
+    } else {
+        alert("Selaimesi ei tue tallennusta");
+    }                        
+
+    function getURLParam (oTarget, sVar) {            
+        return decodeURI(oTarget.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+    }
+    
+    function getDateAndTime() {
+        var d = new Date();
+        var date = d.getDate();
+        var month = d.getMonth() + 1;
+        var hours = d.getHours();
+        var minutes = d.getMinutes();
+        
+        return date + "." + month + " " + hours + ":" + minutes;
+    }
+
+    window.location.assign("alue.html?key=" + area);
+</script>
+</head>
+<body>
+
+</body>
+</html>

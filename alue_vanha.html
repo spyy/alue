@@ -38,24 +38,14 @@
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="otsikko" style="color:#325e60"></h4>
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="otsikko" style="color:#325e60"></h4>
           </div>
-          <form id="lomake" method="get" autocomplete="off" novalidate>
           <div class="modal-body">
-            <div id="piilotetut"><!-- filled in script --></div>
-            <button type="submit" class="btn btn-success btn-block btn-lg" formaction="vihrea.html">Vihreä</button>
-            <button type="submit" class="btn btn-danger btn-block btn-lg" formaction="punainen.html">Punainen</button>
-            <button type="submit" class="btn btn-warning btn-block btn-lg" formaction="keltainen.html">Keltainen</button>
-            <button type="submit" class="btn btn-info btn-block btn-lg" formaction="sininen.html">Sininen</button>
-          </div>
-          <div class="modal-footer">
-            <div class="row">
-              <div class="col-xs-6"><input type="number" class="form-control" placeholder="Lehdet" id="lehdet" name="magazines" min="1" max="6" value="empty"/></div>
-              <div class="col-xs-6"><input type="number" class="form-control" placeholder="Tragtaatit" id="traktaatit" name="tracts" min="30" max="44" value="empty"/></div>
+            <div class="list-group lead" id="koodit">
+              <!-- filled in script -->
             </div>
-          </div>
-          </form>
+          </div>          
         </div>
       </div>
     </div>
@@ -87,11 +77,7 @@
             var color = values[0];
             var date = values[1];
             var time = values[2];
-            var magazines = values[3];
-            var tracts = values[4];
             var content = i + "<span class='badge'>" + date + " " + time + "</span>";
-            if (magazines !== "empty" && typeof magazines !== "undefined") content += "<span class='badge'>" + magazines + "</span>";
-            if (tracts !== "empty" && typeof tracts !== "undefined") content += "<span class='badge'>" + tracts + "</span>";
             inner += "<a href='#' class='list-group-item " + color + "' onclick='showModal(" + i + ");return false;'>" + content + "</a>";
           }                
         }
@@ -109,18 +95,20 @@
       }
         
       function showModal(door) {
-        document.getElementById("lehdet").value = "empty";
-        document.getElementById("traktaatit").value = "empty";
         printModal(door);
         $("#myModal").modal("show");
       }
         
       function printModal(door) {
-        var inner = "";
-        inner += "<input type='hidden' name='key' value='" + key + "'>";
-        inner += "<input type='hidden' name='door' value='" + door + "'>";
-        
-        document.getElementById("piilotetut").innerHTML = inner;
+        var inner = "";    
+            
+        inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-success' class='list-group-item list-group-item-success'>Vihreä</a>";
+        inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-info' class='list-group-item list-group-item-info'>Sininen</a>";
+        inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-warning' class='list-group-item list-group-item-warning'>Keltainen</a>";
+        inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=list-group-item-danger' class='list-group-item list-group-item-danger'>Punainen</a>";
+        inner += "<a href='merkitse.html?key=" + key + "&door=" + door + "&value=empty' class='list-group-item'>Tyhjä</a>";            
+                        
+        document.getElementById("koodit").innerHTML = inner;
         document.getElementById("otsikko").innerHTML = key + " A " + door;
       }
                 
