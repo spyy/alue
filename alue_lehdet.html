@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico">
+    <title>Alueet</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/cover2.css" rel="stylesheet" type="text/css">
+  </head>
+
+  <body>
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead">
+            <div class="inner">
+              <h3 class="masthead-brand" id="brand">alueet.net</h3>
+              <nav>
+                <ul class="nav masthead-nav">                  
+                  <li><a href="uusi.html">Uusi alue</a></li>
+                  <li><a href="alueet.html">Alueet</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <div class="inner cover">
+            <div class="list-group lead text-left" id="alueet">
+              <!-- filled in script -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="myModal">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="otsikko" style="color:#325e60"></h4>
+          </div>
+          <form id="lomake" method="get" autocomplete="off" novalidate>
+          <div class="modal-body">
+            <div id="piilotetut"><!-- filled in script --></div>
+            <button type="submit" class="btn btn-success btn-block btn-lg" formaction="vihrea.html">Vihreä</button>
+            <button type="submit" class="btn btn-danger btn-block btn-lg" formaction="punainen.html">Punainen</button>
+            <button type="submit" class="btn btn-warning btn-block btn-lg" formaction="keltainen.html">Keltainen</button>
+            <button type="submit" class="btn btn-info btn-block btn-lg" formaction="sininen.html">Sininen</button>
+          </div>
+          <div class="modal-footer">
+            <div class="row">
+              <div class="col-xs-6"><input type="number" class="form-control" placeholder="Lehdet" id="lehdet" name="magazines" min="1" max="6" value="empty"/></div>
+              <div class="col-xs-6"><input type="number" class="form-control" placeholder="Tragtaatit" id="traktaatit" name="tracts" min="30" max="44" value="empty"/></div>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+              
+    <script>                
+      var key = getURLParam(window.location, "key");
+                        
+      if (typeof(Storage) != "undefined") {
+        if (key.search("__") == -1) {
+          printArea();
+        }           
+      }
+        
+      function getURLParam (oTarget, sVar) {            
+        return decodeURI(oTarget.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURI(sVar).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+      }
+                
+      function printAreaFromTo(from, to) {
+        var inner = "";
+            
+        var i;
+        for (i = Number(from); i <= Number(to); i++) {
+          var item = window.localStorage.getItem(key + "__" + i);
+          var values = item.split(" ");                
+                
+          if (values.length === 1) {
+            inner += "<a href='#' class='list-group-item " + item + "' onclick='showModal(" + i + ");return false;'>" + i + "</a>";        
+          } else {
+            var color = values[0];
+            var date = values[1];
+            var time = values[2];
+            var magazines = values[3];
+            var tracts = values[4];
+            var content = i + "<span class='badge'>" + date + " " + time + "</span>";
+            if (magazines !== "empty" && typeof magazines !== "undefined") content += "<span class='badge'>" + magazines + "</span>";
+            if (tracts !== "empty" && typeof tracts !== "undefined") content += "<span class='badge'>" + tracts + "</span>";
+            inner += "<a href='#' class='list-group-item " + color + "' onclick='showModal(" + i + ");return false;'>" + content + "</a>";
+          }                
+        }
+            
+        document.getElementById("alueet").innerHTML += inner;            
+      }
+        
+      function printArea() {
+        var inner = "<a href='#' class='list-group-item active'>" + key + "</a>";
+        document.getElementById("alueet").innerHTML = inner;
+            
+        var from = window.localStorage.getItem(key);
+        var to = window.localStorage.getItem(key + "_to");
+        printAreaFromTo(from, to);
+      }
+        
+      function showModal(door) {
+        document.getElementById("lehdet").value = "empty";
+        document.getElementById("traktaatit").value = "empty";
+        printModal(door);
+        $("#myModal").modal("show");
+      }
+        
+      function printModal(door) {
+        var inner = "";
+        inner += "<input type='hidden' name='key' value='" + key + "'>";
+        inner += "<input type='hidden' name='door' value='" + door + "'>";
+        
+        document.getElementById("piilotetut").innerHTML = inner;
+        document.getElementById("otsikko").innerHTML = key + " A " + door;
+      }
+                
+    </script>
+    
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- <script src="bootstrap/js/bootstrap.min.js"></script> -->
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+      
+  </body>
+</html>

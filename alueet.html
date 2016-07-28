@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fi" manifest="alueet.appcache">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,7 @@
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="bootstrap/css/cover2.css" rel="stylesheet" type="text/css">
-    
+    <script type="text/javascript" src="js/storage.js"></script>
   </head>
 
   <body>
@@ -26,7 +26,8 @@
               <h3 class="masthead-brand">alueet.net</h3>
               <nav>
                 <ul class="nav masthead-nav">                  
-                  <li><a href="uusi.html">Uusi alue</a></li>
+                  <li><a href="uusi.html">Uusi</a></li>
+                  <li><a href="poista.html">Poista</a></li>
                   <li class="active"><a href="#">Alueet</a></li>
                 </ul>
               </nav>
@@ -35,7 +36,7 @@
 
           <div class="inner cover">
                 <div class="lead" id="alueet">
-                    <!-- filled by script -->    
+                    <!-- filled by script -->
                 </div>
           </div>
 
@@ -47,40 +48,23 @@
       
 
     <script>
-        var innerHTML = areas();
-        document.getElementById("alueet").innerHTML = innerHTML;
-        
-        function areasFromLocalStorage() {            
-            var innerHTML = "";
-            
-            var i;
-            for (i = 0; i < localStorage.length; i++) {
-                var key = window.localStorage.key(i);
-                var item = window.localStorage.getItem(key);
-                
-                if (key.search("_") == -1) {
-                    innerHTML += "<p><a href='alue.html?key=" + key + "' class='btn btn-lg btn-default'>" + key + "</a></p>";
-                }
-            }
-            
-            return innerHTML;
-        }
-        
-        function heippa() {
-            alert("heippa");
-        }
-        
-        function areas() {
-            var innerHTML = "";            
-            
-            if (typeof(Storage) != "undefined") {   
-                innerHTML = areasFromLocalStorage();
-            } else {
-                alert("Selaimesi ei tue tietokantaa");
-            }     
-            
-            return innerHTML;
-        }    
+      var innerHTML = '';
+      
+      var areas = window.getAreas();
+      
+      var i;
+      for (i = 0; i < areas.length; i++) {
+        var area = areas[i];
+        var name = window.getAreaName(areas[i]);
+        innerHTML += '<p><button type="button" class="btn btn-lg btn-default" onclick="valitse(' + area + ')">' + name + '</button></p>';
+      }
+          
+      document.getElementById('alueet').innerHTML = innerHTML;
+      
+      function valitse(area) {
+        window.setSelectedArea(area);
+        window.location.assign('alue.html');
+      }
     </script> 
       
   </body>

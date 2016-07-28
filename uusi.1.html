@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="fi" manifest="alueet.appcache">
+<html lang="en" manifest="alueet.appcache">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,7 +11,7 @@
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="bootstrap/css/cover.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="js/storage.js"></script>
+    
   </head>
 
   <body>
@@ -27,30 +27,29 @@
               <h3 class="masthead-brand">alueet.net</h3>
               <nav>
                 <ul class="nav masthead-nav">
-                    <li class="active"><a href="#">Uusi</a></li>
-                    <li><a href="poista.html">Poista</a></li>
-                    <li><a href="alueet.html">Alueet</a></li>              
+                    <li class="active"><a href="#">Uusi alue</a></li>
+                    <li><a href="alueet.html">Alueet</a></li>                  
                 </ul>
               </nav>
             </div>
           </div>
 
           <div class="inner cover">                     
-            <form>
+            <form action="talleta.html">
                 <div class="form-group">
-                  <label for="area-name" class="control-label lead">Alueen nimi:</label>
-                  <input type="text" class="form-control" id="name" placeholder="tie, rivitalo tai kerrostalo">
+                  <label for="area-name" class="control-label lead">Nimi:</label>
+                  <input type="text" class="form-control" name="area" id="area-name" placeholder="tie, rivitalo tai kerrostalo" pattern="[a-zA-Z0-9]{2,18}" onInvalid="setCustomValidity('sallitut merkit [a-zA-Z0-9] ei välimerkkejä')" required>
                 </div>
                   <div class="form-group">
                   <label for="area-from" class="control-label lead">Numerosta:</label>
-                  <input type="number" class="form-control" id="from" min="1" max="222" value="1">
+                  <input type="number" class="form-control" name="from" id="area-from" min="1" max="222" value="1">
                 </div>
                 <div class="form-group">
                   <label for="area-to" class="control-label lead">Numeroon:</label>
-                  <input type="number" class="form-control" id="to" min="1" max="222" value="1">
+                  <input type="number" class="form-control" name="to" id="area-to" min="1" max="222" value="1">
                 </div>
-              </form>
-              <button class="btn btn-lg btn-default" onclick="talleta()">Talleta alue</button>
+                <button class="btn btn-lg btn-default" type="submit">Talleta alue</button>
+              </form>              
           </div>
 
           <div class="mastfoot">
@@ -66,18 +65,7 @@
     </div>
     
     <script type="text/javascript">
-      function talleta() {
-        var from = document.getElementById('from').value;
-        var to = document.getElementById('to').value;
-        var name = document.getElementById('name').value;
-        
-        if (name) {
-          createArea(name, from, to);
-          window.location.assign('alueet.html');
-        } else {
-          window.alert('Anna alueen nimi');
-        }
-      }
+      
     </script>
       
   </body>
