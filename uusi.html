@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="fi" manifest="alueet.appcache">
+<html lang="fi">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -72,8 +72,9 @@
         var name = document.getElementById('name').value;
         
         if (name) {
-          createArea(name, from, to);
-          window.location.assign('alueet.html');
+          var area = window.createArea(name, from, to);
+          window.setSelectedArea(area);
+          window.location.assign('alue.html');
         } else {
           window.alert('Anna alueen nimi');
         }

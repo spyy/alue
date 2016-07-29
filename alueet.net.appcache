@@ -12,16 +12,17 @@ bootstrap/fonts/glyphicons-halflings-regular.woff
 bootstrap/fonts/glyphicons-halflings-regular.woff2
 bootstrap/js/bootstrap.js
 bootstrap/js/bootstrap.min.js
+js/storage.js
 alue.html
 alueet.html
-#favicon.ico
+favicon.ico
 index.html
-talleta.html
+poista.html
 uusi.html
-http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
+https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js
 
 NETWORK:
 *
 
 FALLBACK:
-index.html
+/ index.html
