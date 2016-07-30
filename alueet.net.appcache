@@ -13,6 +13,7 @@ bootstrap/fonts/glyphicons-halflings-regular.woff2
 bootstrap/js/bootstrap.js
 bootstrap/js/bootstrap.min.js
 js/storage.js
+js/jquery.min.js
 alue.html
 alueet.html
 favicon.ico
