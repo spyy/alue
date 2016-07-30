@@ -72,14 +72,14 @@
           var values = item.split(" ");                
                 
           if (values.length === 1) {
-            inner += '<a href="#" class="list-group-item ' + item + '" onclick="showModal(' + i + ');return false;">' + i + '</a>';        
+            inner += '<button type="button" class="list-group-item ' + item + '" onclick="showModal(' + i + ');return false;">' + i + '</button>';        
           } else {
             var color = values[0];
             var date = values[1];
             var time = values[2];
             var weekDay = values[3];
             var content = i + '<span class="badge">' + date + ' ' + time + ' ' + weekDay + '</span>';
-            inner += '<a href="#" class="list-group-item ' + color + '" onclick="showModal(' + i + ');return false;">' + content + '</a>';
+            inner += '<button type="button" class="list-group-item ' + color + '" onclick="showModal(' + i + ');return false;">' + content + '</button>';
           }
         }
         
