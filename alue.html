@@ -92,8 +92,7 @@
         
       function showModal(door) {
         window.selectedDoor = door;
-        var areaName = window.getAreaName(window.selectedArea);
-        document.getElementById('otsikko').innerHTML = areaName + ' A ' + window.selectedDoor;
+        document.getElementById('otsikko').innerHTML = 'Asunto ' + window.selectedDoor;
         $('#myModal').modal('show');
       }
         
