@@ -20,7 +20,7 @@
     "@font-family-serif": "Georgia, \"Times New Roman\", Times, serif",
     "@font-family-monospace": "Menlo, Monaco, Consolas, \"Courier New\", monospace",
     "@font-family-base": "@font-family-sans-serif",
-    "@font-size-base": "18px",
+    "@font-size-base": "14px",
     "@font-size-large": "ceil((@font-size-base * 1.25))",
     "@font-size-small": "ceil((@font-size-base * 0.85))",
     "@font-size-h1": "floor((@font-size-base * 2.6))",
@@ -378,7 +378,6 @@
     "@blockquote-border-color": "@gray-lighter",
     "@page-header-border-color": "@gray-lighter",
     "@dl-horizontal-offset": "@component-offset-horizontal",
-    "@dl-horizontal-breakpoint": "@grid-float-breakpoint",
     "@hr-border": "@gray-lighter"
   },
   "css": [
@@ -420,5 +419,5 @@
     "button.js",
     "modal.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=b6d0d057f46a53abb9e93f0eba05d71b"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=9c223d2223692449ecde"
 }
