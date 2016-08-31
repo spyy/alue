@@ -63,7 +63,11 @@
       window.selectedDoor = 0;
       window.selectedArea = window.getSelectedArea();
       
-      printArea(window.selectedArea);
+      if (window.selectedArea) {
+        printArea(window.selectedArea);  
+      } else {
+        window.location.assign('index.html');
+      }
       
       function printArea(area) {
         var from = window.getAreaFrom(area);
