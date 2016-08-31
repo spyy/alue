@@ -378,10 +378,10 @@
     "@blockquote-border-color": "@gray-lighter",
     "@page-header-border-color": "@gray-lighter",
     "@dl-horizontal-offset": "@component-offset-horizontal",
+    "@dl-horizontal-breakpoint": "@grid-float-breakpoint",
     "@hr-border": "@gray-lighter"
   },
   "css": [
-    "print.less",
     "type.less",
     "code.less",
     "grid.less",
@@ -389,7 +389,6 @@
     "forms.less",
     "buttons.less",
     "responsive-utilities.less",
-    "glyphicons.less",
     "button-groups.less",
     "input-groups.less",
     "navs.less",
@@ -399,18 +398,13 @@
     "pager.less",
     "labels.less",
     "badges.less",
-    "jumbotron.less",
     "thumbnails.less",
     "alerts.less",
-    "progress-bars.less",
-    "media.less",
     "list-group.less",
     "panels.less",
     "responsive-embed.less",
     "wells.less",
     "close.less",
-    "component-animations.less",
-    "dropdowns.less",
     "tooltip.less",
     "popovers.less",
     "modals.less"
@@ -419,5 +413,5 @@
     "button.js",
     "modal.js"
   ],
-  "customizerUrl": "http://getbootstrap.com/customize/?id=9c223d2223692449ecde"
+  "customizerUrl": "http://getbootstrap.com/customize/?id=39dfaac8881e7a0f877a513279ce821e"
 }
