@@ -90,7 +90,6 @@ function getAreasDeprecated() {
         var key = window.localStorage.key(i);
         
         console.log(key);
-        window.localStorage.removeItem(key);
         
         if (key.search('_') === -1) {
             console.log('found: ' + key);
