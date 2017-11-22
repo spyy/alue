@@ -51,7 +51,7 @@
     <script>
       var innerHTML = '';
       
-      var areas = window.getAreas();
+      var areas = window.getAreasDeprecated();
       
       var i;
       for (i = 0; i < areas.length; i++) {
@@ -59,11 +59,18 @@
         var name = window.getAreaName(areas[i]);
         innerHTML += '<p><button type="button" class="btn btn-lg btn-default" onclick="valitse(' + area + ')">' + name + '</button></p>';
       }
+      
+      areas = window.getAreas();
+      
+      var i;
+      for (i = 0; i < areas.length; i++) {
+        innerHTML += '<p><button type="button" class="btn btn-lg btn-default" onclick="valitse(' + area.key + ')">' + area.name + '</button></p>';
+      }
           
       document.getElementById('alueet').innerHTML = innerHTML;
       
-      function valitse(area) {
-        window.setSelectedArea(area);
+      function valitse(key) {
+        window.setSelectedArea(key);
         window.location.assign('alue.html');
       }
     </script>

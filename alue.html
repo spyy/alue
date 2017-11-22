@@ -69,11 +69,32 @@
         window.location.assign('index.html');
       }
       
-      function printArea(area) {
-        var from = window.getAreaFrom(area);
-        var to = window.getAreaTo(area);
-        var areaName = window.getAreaName(area);
-        var inner = '<a href="#" class="list-group-item active">' + areaName + '</a>';
+      function printArea(key) {
+        if (key.search('.') === -1) {
+          var area = window.getArea(key);
+          doPrintArea(area);
+        } else {
+          printAreaDeprecated(window.getAreaName(key), window.getAreaFrom(key), window.getAreaTo(key));
+        }
+      }
+      
+      function doPrintArea(area) {
+        var inner = '<a href="#" class="list-group-item active">' + area.name + '</a>';
+        
+        area.doors.forEach(function(door) {
+          if (door.color) {
+            var content = door.number.toString() + '<span class="badge">' + door.date + ' ' + door.time + ' ' + door.weekday + '</span>';
+            inner += '<button type="button" class="list-group-item ' + door.color + '" onclick="showModal(' + door.number.toString() + ');return false;">' + content + '</button>';
+          } else {
+            inner += '<button type="button" class="list-group-item" onclick="showModal(' + door.number.toString() + ');return false;">' + door.number.toString() + '</button>';
+          }
+        });
+        
+        document.getElementById("alueet").innerHTML += inner;  
+      }
+      
+      function printAreaDeprecated(name, from, to) {
+        var inner = '<a href="#" class="list-group-item active">' + name + '</a>';
         var i;
         for (i = Number(from); i <= Number(to); i++) {
           var item = window.getDoor(window.selectedArea, i);

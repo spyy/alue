@@ -1,24 +1,48 @@
-
+const storageVersion = '1.';
+var doorItem = {
+    number: 0,
+    name: '',
+    description: '',
+    date: '',
+    weekday: '',
+    time: '',
+    color: ''
+};
+var areaItem = {
+    key: '',
+    name: '',
+    from: 1,
+    to: 9,
+    date: '',
+    weekday: '',
+    time: '',
+    doors: [],
+    createdAt: ''
+};
 
 
 
 function createArea(name, from, to) {
-    var key = Date.now();
-    window.localStorage.setItem(key.toString(), name);
-    window.localStorage.setItem(key + '_from', from);
-    window.localStorage.setItem(key + '_to', to);
-        
-    var i;
-    for (i = Number(from); i <= Number(to); i++) {
-        window.localStorage.setItem(key + '__' + i, 'empty');                
+    areaItem.key = storageVersion + Date.now().toString();
+    areaItem.name = name;
+    areaItem.from = from;
+    areaItem.to = to;
+    areaItem.createdAt = new Date().toUTCString();
+    
+    for (var i = Number(from); i <= Number(to); i++) {
+        doorItem.number = i;
+        areaItem.doors.push(doorItem);
     }
     
-    return key.toString();
+    window.localStorage.setItem(areaItem.key, JSON.stringify(areaItem));
+    
+    return areaItem;
 }
 
 
-function removeArea(area) {
-    window.localStorage.removeItem(area);
+function removeArea(key) {
+    console.log('removeArea: ' + key);
+    window.localStorage.removeItem(key);
 }
 
 
@@ -58,14 +82,18 @@ function getDateAndTime() {
 }
 
 
-function getAreas() {            
+function getAreasDeprecated() {            
     var res = [];
     
     var i;
     for (i = 0; i < window.localStorage.length; i++) {
         var key = window.localStorage.key(i);
         
+        console.log(key);
+        window.localStorage.removeItem(key);
+        
         if (key.search('_') === -1) {
+            console.log('found: ' + key);
             res.push(key);
         }
     }
@@ -110,5 +138,26 @@ function setDoor(area, door, color) {
 
 function getDoor(area, door) {
     var key = area + '__' + door;
+    return window.localStorage.getItem(key);
+}
+
+function getAreas() {            
+    var res = [];
+    
+    var i;
+    for (i = 0; i < window.localStorage.length; i++) {
+        var key = window.localStorage.key(i);
+        
+        if (key.search('.') > -1) {
+            var item = window.localStorage.getItem(key);
+            res.push(item);
+            console.log(item);
+        }
+    }
+    
+    return res;
+}
+
+function getArea(key) {            
     return window.localStorage.getItem(key);
 }
