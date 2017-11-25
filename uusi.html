@@ -68,7 +68,7 @@
         
         if (name) {
           var area = window.createArea(name, from, to);
-          window.setSelectedArea(area);
+          window.setSelectedArea(area.key);
           window.location.assign('alue.html');
         } else {
           window.alert('Anna alueen nimi');

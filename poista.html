@@ -71,21 +71,25 @@
       window.selectedArea = null;
       
       var innerHTML = '';
-      var areas = window.getAreasDeprecated();
+      var keys = window.getAreasDeprecated();
       
-      var i;
-      for (i = 0; i < areas.length; i++) {
-        var area = areas[i];
-        var name = window.getAreaName(areas[i]);
-        innerHTML += '<p><button type="button" class="btn btn-default btn-lg" onclick="valitse(' + area + ')">' + name + '</button></p>';
-      }
+      keys.forEach(function(key) {
+        console.log('vanha:' + key);
+        var name = window.getAreaNameDeprecated(key);
+        innerHTML += '<p><button type="button" class="btn btn-default btn-lg" onclick="valitse(\'' + key.toString() + '\', \'' + name.toString() + '\')">' + name + '</button></p>';
+      });
+      
+      var areas = window.getAreas();
+      
+      areas.forEach(function(area) {
+        innerHTML += '<p><button type="button" class="btn btn-default btn-lg" onclick="valitse(\'' + area.key.toString() + '\', \'' + area.name.toString() + '\')">' + area.name + '</button></p>';
+      });
           
       document.getElementById('alueet').innerHTML = innerHTML;
       
-      function valitse(area) {
-          window.selectedArea = area;
-          var areaName = window.getAreaName(area);
-          document.getElementById('otsikko').innerHTML = 'Poista ' + areaName;
+      function valitse(key, name) {
+          window.selectedArea = key;
+          document.getElementById('otsikko').innerHTML = 'Poista ' + name;
           $('#myModal').modal('show');
       }
       

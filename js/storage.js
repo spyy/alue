@@ -1,5 +1,5 @@
 const storageVersion = '1.';
-var doorItem = {
+const doorItem = {
     number: 0,
     name: '',
     description: '',
@@ -31,7 +31,7 @@ function createArea(name, from, to) {
     
     for (var i = Number(from); i <= Number(to); i++) {
         doorItem.number = i;
-        areaItem.doors.push(doorItem);
+        areaItem.doors.push( { number: i } );
     }
     
     window.localStorage.setItem(areaItem.key, JSON.stringify(areaItem));
@@ -70,15 +70,28 @@ function getWeekDay() {
     return WEEK_DAYS[d.getDay()];
 }
 
-function getDateAndTime() {
+
+function getDate() {
     var d = new Date();
     var day = d.getDate();
     var month = d.getMonth() + 1;
+    
+    return day + '.' + month;
+}
+
+
+function getTime() {
+    var d = new Date();
     var hours = d.getHours();
     var minutes = d.getMinutes();
     minutes = minutes > 9 ? minutes : '0' + minutes;
     
-    return day + '.' + month + ' ' + hours + ':' + minutes;
+    return hours + ':' + minutes;
+}
+
+
+function getDateAndTime() {
+    return getDate() + ' ' + getTime();
 }
 
 
@@ -157,4 +170,23 @@ function getAreas() {
 
 function getArea(key) {            
     return JSON.parse(window.localStorage.getItem(key));
+}
+
+function setArea(area) {
+    window.localStorage.setItem(area.key, JSON.stringify(area));
+}
+
+function setDoor(key, number, color) {
+    var area = getArea(key);
+    
+    area.doors.forEach(function(door) {
+        if (door.number === number ) {
+            door.color = color;
+            door.date = getDate();
+            door.weekday = getWeekDay();
+            door.time = getTime();
+        }
+    });
+    
+    setArea(area);
 }

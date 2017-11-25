@@ -70,8 +70,9 @@
       }
       
       function printArea(key) {
+        console.log('selected: ' + key);
         if (key.search(/[.]/g) === -1) {
-          printAreaDeprecated(window.getAreaName(key), window.getAreaFrom(key), window.getAreaTo(key));
+          printAreaDeprecated(window.getAreaNameDeprecated(key), window.getAreaFromDeprecated(key), window.getAreaToDeprecated(key));
         } else {
           var area = window.getArea(key);
           doPrintArea(area);
@@ -122,7 +123,12 @@
       }
         
       function merkkaa(color) {
-        window.setDoorDeprecated(window.selectedArea, window.selectedDoor, color);
+        if (window.selectedArea.search(/[.]/g) === -1) {
+            window.setDoorDeprecated(window.selectedArea, window.selectedDoor, color);
+        } else {
+          window.setDoor(window.selectedArea, window.selectedDoor, color);
+        }
+        
         window.location.reload(false);
       }
     </script>
