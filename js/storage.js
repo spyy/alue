@@ -147,8 +147,8 @@ function getAreas() {
         
         if (key.search(/[.]/g) !== -1) {
             var item = window.localStorage.getItem(key);
+            console.log('uusi: ' + item);
             res.push(JSON.parse(item));
-            console.log('uusi: ' + key);
         }
     }
     
