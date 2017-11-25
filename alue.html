@@ -70,11 +70,11 @@
       }
       
       function printArea(key) {
-        if (key.search('.') === -1) {
+        if (key.search(/[.]/g) === -1) {
+          printAreaDeprecated(window.getAreaName(key), window.getAreaFrom(key), window.getAreaTo(key));
+        } else {
           var area = window.getArea(key);
           doPrintArea(area);
-        } else {
-          printAreaDeprecated(window.getAreaName(key), window.getAreaFrom(key), window.getAreaTo(key));
         }
       }
       
@@ -97,7 +97,7 @@
         var inner = '<a href="#" class="list-group-item active">' + name + '</a>';
         var i;
         for (i = Number(from); i <= Number(to); i++) {
-          var item = window.getDoor(window.selectedArea, i);
+          var item = window.getDoorDeprecated(window.selectedArea, i);
                 
           if (item === 'empty') {
             inner += '<button type="button" class="list-group-item ' + item + '" onclick="showModal(' + i + ');return false;">' + i + '</button>';        
@@ -122,7 +122,7 @@
       }
         
       function merkkaa(color) {
-        window.setDoor(window.selectedArea, window.selectedDoor, color);
+        window.setDoorDeprecated(window.selectedArea, window.selectedDoor, color);
         window.location.reload(false);
       }
     </script>

@@ -61,11 +61,9 @@
       }
       
       areas = window.getAreas();
-      
-      var i;
-      for (i = 0; i < areas.length; i++) {
+      areas.forEach(function(area) {
         innerHTML += '<p><button type="button" class="btn btn-lg btn-default" onclick="valitse(' + area.key + ')">' + area.name + '</button></p>';
-      }
+      });
           
       document.getElementById('alueet').innerHTML = innerHTML;
       

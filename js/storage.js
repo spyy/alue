@@ -46,18 +46,18 @@ function removeArea(key) {
 }
 
 
-function getAreaName(key) {
+function getAreaNameDeprecated(key) {
     return window.localStorage.getItem(key);
 }
 
 
-function getAreaFrom(area) {
+function getAreaFromDeprecated(area) {
     var key = area + '_from'
     return window.localStorage.getItem(key);
 }
 
 
-function getAreaTo(area) {
+function getAreaToDeprecated(area) {
     var key = area + '_to'
     return window.localStorage.getItem(key);
 }
@@ -89,10 +89,8 @@ function getAreasDeprecated() {
     for (i = 0; i < window.localStorage.length; i++) {
         var key = window.localStorage.key(i);
         
-        console.log(key);
-        
-        if (key.search('_') === -1) {
-            console.log('found: ' + key);
+        if (key.search(/[._]/g) === -1) {
+            console.log('vanha: ' + key);
             res.push(key);
         }
     }
@@ -101,7 +99,7 @@ function getAreasDeprecated() {
 }
 
 
-function getDoors(area) {            
+function getDoorsDeprecated(area) {            
     var res = [];
     
     var i;
@@ -127,7 +125,7 @@ function getSelectedArea() {
 }
 
 
-function setDoor(area, door, color) {
+function setDoorDeprecated(area, door, color) {
     var key = area + '__' + door;
     var value = color + ' ' + getDateAndTime() + ' ' + getWeekDay();
     
@@ -135,7 +133,7 @@ function setDoor(area, door, color) {
 }
 
 
-function getDoor(area, door) {
+function getDoorDeprecated(area, door) {
     var key = area + '__' + door;
     return window.localStorage.getItem(key);
 }
@@ -147,10 +145,10 @@ function getAreas() {
     for (i = 0; i < window.localStorage.length; i++) {
         var key = window.localStorage.key(i);
         
-        if (key.search('.') > -1) {
+        if (key.search(/[.]/g) !== -1) {
             var item = window.localStorage.getItem(key);
-            res.push(item);
-            console.log(item);
+            res.push(JSON.parse(item));
+            console.log('uusi: ' + key);
         }
     }
     
@@ -158,5 +156,5 @@ function getAreas() {
 }
 
 function getArea(key) {            
-    return window.localStorage.getItem(key);
+    return JSON.parse(window.localStorage.getItem(key));
 }
