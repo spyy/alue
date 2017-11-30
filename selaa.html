@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+  <title>Kenttäpalvelus</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  
+  <link href="css/alueet.css" rel="stylesheet">
+</head>  </head>
+
+  <body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">alueet.net</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li><a href="uusi.html">Uusi</a></li>
+                  <li><a href="poista.html">Poista</a></li>
+                  <li class="active"><a href="#">Alueet</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <div class="lead" id="alueet">
+              <!-- filled by script -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <script>
+      var innerHTML = '';
+
+      var areas = window.getAreasDeprecated();
+
+      var i;
+      for (i = 0; i < areas.length; i++) {
+        var area = areas[i];
+        var name = window.getAreaNameDeprecated(areas[i]);
+        innerHTML += '<p><button type="button" class="btn btn-lg btn-default" onclick="valitse(' + area + ')">' + name + '</button></p>';
+      }
+
+      areas = window.getAreas();
+      areas.forEach(function(area) {
+        innerHTML += '<p><button type="button" class="btn btn-lg btn-default" onclick="valitse(' + area.key + ')">' + area.name + '</button></p>';
+      });
+
+      document.getElementById('alueet').innerHTML = innerHTML;
+
+      function valitse(key) {
+        window.setSelectedArea(key);
+        window.location.assign('alue.html');
+      }
+    </script>
+
+
+  </body>
+</html>

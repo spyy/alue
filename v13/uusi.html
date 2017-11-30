@@ -4,14 +4,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <link rel="icon" href="favicon.ico">
-    
+
     <title>Alueet</title>
 
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="bootstrap/css/cover.css" rel="stylesheet" type="text/css">
-    
+
     <script type="text/javascript" src="js/storage.js"></script>
   </head>
 
@@ -30,24 +30,24 @@
                 <ul class="nav masthead-nav">
                     <li class="active"><a href="#">Uusi</a></li>
                     <li><a href="poista.html">Poista</a></li>
-                    <li><a href="alueet.html">Alueet</a></li>              
+                    <li><a href="alueet.html">Alueet</a></li>
                 </ul>
               </nav>
             </div>
           </div>
 
-          <div class="inner cover">                     
+          <div class="inner cover">
             <form>
                 <div class="form-group">
-                  <label for="area-name" class="control-label lead">Alueen nimi:</label>
+                  <label for="name" class="control-label lead">Alueen nimi:</label>
                   <input type="text" class="form-control" id="name" placeholder="tie, rivitalo tai kerrostalo">
                 </div>
                   <div class="form-group">
-                  <label for="area-from" class="control-label lead">Numerosta:</label>
+                  <label for="from" class="control-label lead">Numerosta:</label>
                   <input type="number" class="form-control" id="from" min="1" max="222" value="1">
                 </div>
                 <div class="form-group">
-                  <label for="area-to" class="control-label lead">Numeroon:</label>
+                  <label for="to" class="control-label lead">Numeroon:</label>
                   <input type="number" class="form-control" id="to" min="1" max="222" value="1">
                 </div>
               </form>
@@ -56,16 +56,17 @@
 
         </div>
 
-      </div>       
-    
+      </div>
+
     </div>
-    
+
     <script type="text/javascript">
       function talleta() {
+        window.alert('talleta');
         var from = document.getElementById('from').value;
         var to = document.getElementById('to').value;
         var name = document.getElementById('name').value;
-        
+
         if (name) {
           var area = window.createArea(name, from, to);
           window.setSelectedArea(area);
@@ -75,7 +76,6 @@
         }
       }
     </script>
-    
+
   </body>
 </html>
-

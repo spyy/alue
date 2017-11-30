@@ -3,14 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <link rel="icon" href="favicon.ico">
-    
+
     <title>Alueet</title>
-    
+
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     <link href="bootstrap/css/cover2.css" rel="stylesheet" type="text/css">
-    
+
     <script type="text/javascript" src="js/storage.js"></script>
   </head>
 
@@ -18,29 +18,36 @@
     <div class="site-wrapper">
       <div class="site-wrapper-inner">
         <div class="cover-container">
-          <div class="masthead">
+          <header class="masthead clearfix">
             <div class="inner">
-              <h3 class="masthead-brand" id="brand">alueet.net</h3>
-              <nav>
-                <ul class="nav masthead-nav">                  
-                  <li><a href="uusi.html">Uusi</a></li>
-                  <li><a href="poista.html">Poista</a></li>
-                  <li><a href="alueet.html">Alueet</a></li>
-                </ul>
-              </nav>
+              <nav class="navbar navbar-expand-sm navbar-dark" >
+                <h3 class="masthead-brand">alueet.net</h3>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                  <nav class="navbar-nav ml-auto nav-masthead">
+                    <a class="nav-link ml-auto p-2 active" href="#">Etusivu</a>
+                    <a class="nav-link ml-auto p-2" href="selaa.html">Selaa</a>
+                    <a class="nav-link ml-auto p-2" href="uusi.html">Uusi</a>
+                    <a class="nav-link ml-auto p-2" href="poista.html">Poista</a>
+                  </nav>
+                </div>
+              </nav
             </div>
-          </div>
-          <div class="inner cover">
-            <div class="list-group lead text-left" id="alueet">
+          </header>
+
+          <main role="main" class="inner cover">
+            <div class="list-group lead text-left" id="alue">
               <!-- filled in script -->
             </div>
-          </div>
+          </main>
         </div>
       </div>
     </div>
-      
+
     <!-- Modal -->
-    <div class="modal fade bs-example-modal-sm" id="myModal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-header">
@@ -51,6 +58,9 @@
             <button type="button" class="btn btn-danger btn-block btn-lg" onclick="merkkaa('list-group-item-danger')">Punainen</button>
             <button type="button" class="btn btn-warning btn-block btn-lg" onclick="merkkaa('list-group-item-warning')">Keltainen</button>
             <button type="button" class="btn btn-info btn-block btn-lg" onclick="merkkaa('list-group-item-info')">Sininen</button>
+            <button type="button" class="btn btn-light btn-block btn-lg" onclick="merkkaa('list-group-item-light')">Sininen</button>
+            <button type="button" class="btn btn-dark btn-block btn-lg" onclick="merkkaa('list-group-item-dark')">Sininen</button>
+            <button type="button" class="btn btn-secondary btn-block btn-lg" onclick="merkkaa('list-group-item-secondary')">Sininen</button>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-block btn-lg" data-dismiss="modal">Sulje</button>
@@ -58,30 +68,22 @@
         </div>
       </div>
     </div>
-              
+
+
     <script>
       window.selectedDoor = 0;
       window.selectedArea = window.getSelectedArea();
-      
+
       if (window.selectedArea) {
-        printArea(window.selectedArea);  
+        var area = window.getArea(window.selectedArea);
+        printArea(area);
       } else {
         window.location.assign('index.html');
       }
-      
-      function printArea(key) {
-        console.log('selected: ' + key);
-        if (key.search(/[.]/g) === -1) {
-          printAreaDeprecated(window.getAreaNameDeprecated(key), window.getAreaFromDeprecated(key), window.getAreaToDeprecated(key));
-        } else {
-          var area = window.getArea(key);
-          doPrintArea(area);
-        }
-      }
-      
-      function doPrintArea(area) {
+
+      function printArea(area) {
         var inner = '<a href="#" class="list-group-item active">' + area.name + '</a>';
-        
+
         area.doors.forEach(function(door) {
           if (door.color) {
             var content = door.number.toString() + '<span class="badge">' + door.date + ' ' + door.time + ' ' + door.weekday + '</span>';
@@ -90,52 +92,28 @@
             inner += '<button type="button" class="list-group-item" onclick="showModal(' + door.number.toString() + ');return false;">' + door.number.toString() + '</button>';
           }
         });
-        
-        document.getElementById("alueet").innerHTML += inner;  
+
+        document.getElementById("alueet").innerHTML += inner;
       }
-      
-      function printAreaDeprecated(name, from, to) {
-        var inner = '<a href="#" class="list-group-item active">' + name + '</a>';
-        var i;
-        for (i = Number(from); i <= Number(to); i++) {
-          var item = window.getDoorDeprecated(window.selectedArea, i);
-                
-          if (item === 'empty') {
-            inner += '<button type="button" class="list-group-item ' + item + '" onclick="showModal(' + i + ');return false;">' + i + '</button>';        
-          } else {
-            var values = item.split(' ');
-            var color = values[0];
-            var date = values[1];
-            var time = values[2];
-            var weekDay = values[3];
-            var content = i + '<span class="badge">' + date + ' ' + time + ' ' + weekDay + '</span>';
-            inner += '<button type="button" class="list-group-item ' + color + '" onclick="showModal(' + i + ');return false;">' + content + '</button>';
-          }
-        }
-        
-        document.getElementById("alueet").innerHTML += inner;  
-      }
-        
+
       function showModal(door) {
         window.selectedDoor = door;
         document.getElementById('otsikko').innerHTML = 'Asunto ' + window.selectedDoor;
         $('#myModal').modal('show');
       }
-        
+
       function merkkaa(color) {
-        if (window.selectedArea.search(/[.]/g) === -1) {
-            window.setDoorDeprecated(window.selectedArea, window.selectedDoor, color);
-        } else {
-          window.setDoor(window.selectedArea, window.selectedDoor, color);
-        }
-        
+        window.setDoor(window.selectedArea, window.selectedDoor, color);
         window.location.reload(false);
       }
     </script>
-    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-      
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
   </body>
 </html>
