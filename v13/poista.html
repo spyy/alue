@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="fi" manifest="alueet.net.appcache">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="icon" href="favicon.ico">
+    
+    <title>Alueet</title>
+
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/cover2.css" rel="stylesheet" type="text/css">
+    
+    <script type="text/javascript" src="js/storage.js"></script>
+  </head>
+
+  <body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">alueet.net</h3>
+              <nav>
+                <ul class="nav masthead-nav">                  
+                  <li><a href="uusi.html">Uusi</a></li>
+                  <li class="active"><a href="#">Poista</a></li>
+                  <li><a href="alueet.html">Alueet</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="inner cover">
+                <div class="lead" id="alueet">
+                    <!-- filled by script -->
+                </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    
+    <!-- Modal -->
+    <div class="modal fade bs-example-modal-sm" id="myModal">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-body">
+            <h4 class="modal-title" id="otsikko" style="color:#325e60"></h4>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Peru</button>
+            <button type="button" class="btn btn-primary" onclick="poista()">Poista</button>
+          </div>
+        </div>
+      </div>
+    </div>
+      
+
+    <script>
+      window.selectedArea = null;
+      
+      var innerHTML = '';
+      var areas = window.getAreas();
+      
+      var i;
+      for (i = 0; i < areas.length; i++) {
+        var area = areas[i];
+        var name = window.getAreaName(areas[i]);
+        innerHTML += '<p><button type="button" class="btn btn-default btn-lg" onclick="valitse(' + area + ')">' + name + '</button></p>';
+      }
+          
+      document.getElementById('alueet').innerHTML = innerHTML;
+      
+      function valitse(area) {
+          window.selectedArea = area;
+          var areaName = window.getAreaName(area);
+          document.getElementById('otsikko').innerHTML = 'Poista ' + areaName;
+          $('#myModal').modal('show');
+      }
+      
+      function poista() {
+        window.removeArea(window.selectedArea);
+        window.location.reload(false);
+      }
+    </script>
+    
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+      
+  </body>
+</html>
