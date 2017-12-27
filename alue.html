@@ -48,7 +48,7 @@
           </header>
 
           <main role="main" class="inner cover">
-            <ul class="list-group text-left" id="alue">
+            <ul class="list-group text-left lead" id="alue">
               <!-- filled in script -->
             </ul>
           </main>
@@ -62,8 +62,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title" id="otsikko" style="color:#325e60"></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
             <button type="button" class="btn btn-success btn-block btn-lg" onclick="merkkaa('list-group-item-success')">Vihreä</button>
             <button type="button" class="btn btn-danger btn-block btn-lg" onclick="merkkaa('list-group-item-danger')">Punainen</button>
             <button type="button" class="btn btn-warning btn-block btn-lg" onclick="merkkaa('list-group-item-warning')">Keltainen</button>
@@ -104,7 +108,7 @@
 
         area.doors.forEach(function(door) {
           if (door.color) {
-            var content = door.number.toString() + '<span class="badge badge-primary badge-pill">' + door.date + ' ' + door.time + ' ' + door.weekday + '</span>';
+            var content = door.number.toString() + ' Virtanen oli täällä joo niinpä niin' + '<span class="badge badge-primary">' + door.date + ' ' + door.time + ' ' + door.weekday + '</span>';
             inner += '<li class="list-group-item d-flex justify-content-between align-items-center ' + door.color + '" onclick="showModal(' + door.number.toString() + ');return false;">' + content + '</li>';
           } else {
             inner += '<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-none" onclick="showModal(' + door.number.toString() + ');return false;">' + door.number.toString() + '</li>';
