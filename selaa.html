@@ -1,46 +1,58 @@
 <!DOCTYPE html>
 <html lang="fi">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
-  <title>Kenttäpalvelus</title>
+    <title>Kenttäpalvelus</title>
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-  
-  <link href="css/alueet.css" rel="stylesheet">
-</head>  </head>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="css/alueet.css" rel="stylesheet">
+  </head>
 
   <body>
 
     <div class="site-wrapper">
-
       <div class="site-wrapper-inner">
-
         <div class="cover-container">
-
-          <div class="masthead clearfix">
+          <header class="masthead clearfix">
             <div class="inner">
-              <h3 class="masthead-brand">alueet.net</h3>
-              <nav>
-                <ul class="nav masthead-nav">
-                  <li><a href="uusi.html">Uusi</a></li>
-                  <li><a href="poista.html">Poista</a></li>
-                  <li class="active"><a href="#">Alueet</a></li>
-                </ul>
-              </nav>
+              <nav class="navbar navbar-expand-sm navbar-dark" >
+                <h3 class="masthead-brand">alueet.net</h3>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                  <ul class="navbar-nav nav-masthead ml-auto">
+                    <li class="nav-item p-2">
+                      <a class="nav-link" href="index.html">Etusivu</a>
+                    </li>
+                    <li class="nav-item p-2 active">
+                      <a class="nav-link" href="selaa.html">Selaa</a>
+                    </li>
+                    <li class="nav-item p-2">
+                      <a class="nav-link" href="uusi.html">Uusi</a>
+                    </li>
+                    <li class="nav-item p-2">
+                      <a class="nav-link" href="poista.html">Poista</a>
+                    </li>
+                  </ul>
+                </div>
+              </nav
             </div>
-          </div>
+          </header>
 
-          <div class="inner cover">
+          <main role="main" class="inner cover">
             <div class="lead" id="alueet">
               <!-- filled by script -->
             </div>
-          </div>
+          </main>
 
         </div>
 

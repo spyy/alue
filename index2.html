@@ -12,7 +12,6 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
-    <!-- Custom styles for this template -->
     <link href="css/alueet.css" rel="stylesheet">
   </head>
 
@@ -30,17 +29,17 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                   <ul class="navbar-nav nav-masthead ml-auto">
-                    <li class="nav-item p-2">
-                      <a class="nav-link" href="index.html">Etusivu</a>
-                    </li>
-                    <li class="nav-item p-2">
-                      <a class="nav-link" href="selaa.html">Selaa</a>
-                    </li>
                     <li class="nav-item p-2 active">
-                      <a class="nav-link" href="uusi.html">Uusi</a>
+                      <a class="nav-link" href="#">Etusivu</a>
                     </li>
                     <li class="nav-item p-2">
-                      <a class="nav-link" href="poista.html">Poista</a>
+                      <a class="nav-link" href="#">Selaa</a>
+                    </li>
+                    <li class="nav-item p-2">
+                      <a class="nav-link" href="#">Uusi</a>
+                    </li>
+                    <li class="nav-item p-2">
+                      <a class="nav-link" href="#">Poista</a>
                     </li>
                   </ul>
                 </div>
@@ -49,30 +48,25 @@
           </header>
 
           <main role="main" class="inner cover">
-            <div class="card text-white text-center bg-alueet border-dark">
-              <div class="card-header text-center">
-                Uusi alue
-              </div>
-              <div class="card-body">
-                <form>
-                  <div class="form-group">
-                    <label for="name" class="control-label">Nimi</label>
-                    <input type="text" class="form-control" id="name" placeholder="tie, rivitalo tai kerrostalo">
-                  </div>
-                    <div class="form-group">
-                    <label for="from" class="control-label">Numerosta</label>
-                    <input type="number" class="form-control" id="from" min="1" max="222" value="1">
-                  </div>
-                  <div class="form-group">
-                    <label for="to" class="control-label">Numeroon</label>
-                    <input type="number" class="form-control" id="to" min="1" max="222" value="1">
-                  </div>
-                </form>
-                <button class="btn text-white btn-outline-light mt-2" onclick="talleta()">Talleta alue</button>
-              </div>
-            </div>
-
+            <h1 class="cover-heading">Muistiinpanot kosketusnäytöllä</h1>
+            <p class="lead mb-4">Värikoodit, joiden merkityksen sinä päätät.</p>
+            <p class="lead">
+              <a href="#" class="btn btn-lg text-white btn-outline-light">Tee uusi alue</a>
+            </p>
+            <p class="lead">
+              <a href="#" class="btn btn-lg text-white btn-outline-light">Selaa alueita</a>
+            </p>
+            <p class="lead">
+              <a href="v13/index.html" class="btn btn-lg text-white btn-outline-light">Versio 1.3</a>
+            </p>
           </main>
+
+          <footer class="mastfoot">
+            <div class="inner">
+              <p><strong>Välimuistin tyhjennys poistaa alueet</strong></p>
+              <p>sami.pyy@gmail.com (1.4)</p>
+            </div>
+          </footer>
 
         </div>
 
@@ -87,23 +81,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="js/storage.js"></script>
 
-    <script type="text/javascript">
-      function talleta() {
-        var from = document.getElementById('from').value;
-        var to = document.getElementById('to').value;
-        var name = document.getElementById('name').value;
-
-        if (name) {
-          var area = window.createArea(name, from, to);
-          window.setSelectedArea(area.key);
-          window.location.assign('alue.html');
-        } else {
-          window.alert('Anna alueen nimi');
-        }
-      }
-    </script>
-
-  </body>
-</html>
+</body></html>

@@ -63,7 +63,7 @@ body {
  */
 
 .masthead {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .masthead-brand {
@@ -75,7 +75,7 @@ body {
   padding: .20rem 0;
   font-weight: 600;
   color: rgba(255,255,255,.5);
-  background-color: transparent;  
+  background-color: transparent;
 }
 
 .nav-masthead .nav-link:hover,
@@ -100,6 +100,7 @@ body {
     float: right;
   }
 }
+
 
 
 /*
