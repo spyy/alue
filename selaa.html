@@ -30,9 +30,6 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                   <ul class="navbar-nav nav-masthead ml-auto">
-                    <li class="nav-item p-2">
-                      <a class="nav-link" href="index.html">Etusivu</a>
-                    </li>
                     <li class="nav-item p-2 active">
                       <a class="nav-link" href="selaa.html">Selaa</a>
                     </li>
@@ -41,6 +38,9 @@
                     </li>
                     <li class="nav-item p-2">
                       <a class="nav-link" href="poista.html">Poista</a>
+                    </li>
+                    <li class="nav-item p-2">
+                      <a class="nav-link" href="ohje.html">Ohje</a>
                     </li>
                   </ul>
                 </div>
@@ -59,7 +59,7 @@
       </div>
 
     </div>
-    
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -67,21 +67,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
+    <script type="text/javascript" src="js/storage.js"></script>
+
     <script>
       var innerHTML = '';
 
-      var areas = window.getAreas();
-
-      var i;
-      for (i = 0; i < areas.length; i++) {
-        var area = areas[i];
-        var name = window.getAreaName(areas[i]);
-        innerHTML += '<p><button type="button" class="btn btn-lg btn-default" onclick="valitse(' + area + ')">' + name + '</button></p>';
-      }
-
       areas = window.getAreas();
       areas.forEach(function(area) {
-        innerHTML += '<p><button type="button" class="btn btn-lg btn-default" onclick="valitse(' + area.key + ')">' + area.name + '</button></p>';
+        innerHTML += '<p class="lead"><button type="button" class="btn btn-lg text-white btn-outline-light" onclick="valitse(' + area.key + ')">' + area.name + '</button></p>';
       });
 
       document.getElementById('alueet').innerHTML = innerHTML;
