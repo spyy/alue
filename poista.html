@@ -1,58 +1,71 @@
 <!DOCTYPE html>
-<html lang="fi" manifest="alueet.net.appcache">
+<html lang="fi">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link rel="icon" href="favicon.ico">
-    
-    <title>Alueet</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="bootstrap/css/cover2.css" rel="stylesheet" type="text/css">
-    
-    <script type="text/javascript" src="js/storage.js"></script>
+    <title>Kentt�palvelus</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="css/alueet.css" rel="stylesheet">
   </head>
 
   <body>
 
     <div class="site-wrapper">
-
       <div class="site-wrapper-inner">
-
         <div class="cover-container">
-
-          <div class="masthead clearfix">
+          <header class="masthead clearfix">
             <div class="inner">
-              <h3 class="masthead-brand">alueet.net</h3>
-              <nav>
-                <ul class="nav masthead-nav">                  
-                  <li><a href="uusi.html">Uusi</a></li>
-                  <li class="active"><a href="#">Poista</a></li>
-                  <li><a href="alueet.html">Alueet</a></li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-
-          <div class="inner cover">
-                <div class="lead" id="alueet">
-                    <!-- filled by script -->
+              <nav class="navbar navbar-expand-sm navbar-dark" >
+                <h3 class="masthead-brand">alueet.net</h3>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                  <ul class="navbar-nav nav-masthead ml-auto">
+                    <li class="nav-item p-2">
+                      <a class="nav-link" href="selaa.html">Selaa</a>
+                    </li>
+                    <li class="nav-item p-2">
+                      <a class="nav-link" href="uusi.html">Uusi</a>
+                    </li>
+                    <li class="nav-item p-2 active">
+                      <a class="nav-link" href="poista.html">Poista</a>
+                    </li>
+                    <li class="nav-item p-2">
+                      <a class="nav-link" href="ohje.html">Ohje</a>
+                    </li>
+                  </ul>
                 </div>
-          </div>
+              </nav
+            </div>
+          </header>
+
+          <main role="main" class="inner cover">
+            <div id="alueet">
+              <!-- filled by script -->
+            </div>
+          </main>
 
         </div>
 
       </div>
 
     </div>
-    
+
     <!-- Modal -->
-    <div class="modal fade bs-example-modal-sm" id="myModal">
+    <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
       <div class="modal-dialog modal-sm">
         <div class="modal-content">
           <div class="modal-body">
-            <h4 class="modal-title" id="otsikko" style="color:#325e60"></h4>
+            <h4 class="modal-title text-dark" id="otsikko"></h4>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Peru</button>
@@ -61,43 +74,40 @@
         </div>
       </div>
     </div>
-      
-    
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="js/storage.js"></script>
+
     <script>
       window.selectedArea = null;
-      
+
       var innerHTML = '';
-      var keys = window.getAreasDeprecated();
-      
-      keys.forEach(function(key) {
-        console.log('vanha:' + key);
-        var name = window.getAreaNameDeprecated(key);
-        innerHTML += '<p><button type="button" class="btn btn-default btn-lg" onclick="valitse(\'' + key.toString() + '\', \'' + name.toString() + '\')">' + name + '</button></p>';
-      });
-      
-      var areas = window.getAreas();
-      
+
+      areas = window.getAreas();
       areas.forEach(function(area) {
-        innerHTML += '<p><button type="button" class="btn btn-default btn-lg" onclick="valitse(\'' + area.key.toString() + '\', \'' + area.name.toString() + '\')">' + area.name + '</button></p>';
+        innerHTML += '<p class="lead"><button type="button" class="btn btn-lg text-white btn-outline-light" onclick="valitse(\'' + area.key + '\', \'' + area.name + '\')">' + area.name + '</button></p>';
       });
-          
+
       document.getElementById('alueet').innerHTML = innerHTML;
-      
+
       function valitse(key, name) {
           window.selectedArea = key;
           document.getElementById('otsikko').innerHTML = 'Poista ' + name;
           $('#myModal').modal('show');
       }
-      
+
       function poista() {
         window.removeArea(window.selectedArea);
         window.location.reload(false);
       }
     </script>
-      
+
   </body>
 </html>
