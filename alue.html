@@ -105,7 +105,7 @@
 
         area.doors.forEach(function(door) {
           if (door.color) {
-            var content = door.number.toString() + ' ' + door.description.substring(0,9) + '<span class="badge badge-primary">' + door.date + ' ' + door.time + ' ' + door.weekday + '</span>';
+            var content = door.number.toString() + ' ' + door.description.substring(0,12) + '<span class="badge badge-primary">' + door.date + ' ' + door.time + ' ' + door.weekday + '</span>';
             inner += '<li class="list-group-item d-flex justify-content-between align-items-center ' + door.color + '" onclick="showModal(' + door.number.toString() + ');return false;">' + content + '</li>';
           } else {
             inner += '<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-none" onclick="showModal(' + door.number.toString() + ');return false;">' + door.number.toString() + '</li>';
@@ -125,7 +125,7 @@
 
       function merkkaa(color) {
         var description = $('#description').val();
-        window.setDoor(window.selectedArea, window.selectedDoor, color, description);
+        window.setDoor(window.selectedArea, window.selectedDoor, color, description.toLowerCase());
         window.location.reload(false);
       }
     </script>
