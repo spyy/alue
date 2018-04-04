@@ -1,14 +1,10 @@
 CACHE MANIFEST
-# v1.3 - 2016-09-12
+# v1.4 - 2018-04-04
 
 CACHE:
-bootstrap/css/bootstrap-theme.css
-bootstrap/css/bootstrap-theme.min.css
-bootstrap/css/bootstrap.css
 bootstrap/css/bootstrap.min.css
 bootstrap/css/cover.css
 bootstrap/css/cover2.css
-bootstrap/js/bootstrap.js
 bootstrap/js/bootstrap.min.js
 js/storage.js
 js/jquery.min.js

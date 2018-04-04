@@ -1,72 +1,58 @@
 <!DOCTYPE html>
-<html lang="fi">
+<html lang="fi" manifest="alueet.net.appcache">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Värikoodit joiden merkityksen sinä päätät.">
+
+    <link rel="icon" href="favicon.ico">
 
     <title>Kenttäpalvelus</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-
-    <!-- Custom styles for this template -->
-    <link href="css/alueet.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/cover.css" rel="stylesheet" type="text/css">
   </head>
 
   <body>
+
     <div class="site-wrapper">
+
       <div class="site-wrapper-inner">
+
         <div class="cover-container">
-          <header class="masthead clearfix">
+
+          <div class="masthead clearfix">
             <div class="inner">
-              <nav class="navbar navbar-expand-sm navbar-dark" >
-                <h3 class="masthead-brand">alueet.net</h3>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                  <ul class="navbar-nav nav-masthead ml-auto">
-                    <li class="nav-item p-2">
-                      <a class="nav-link" href="selaa.html">Selaa</a>
-                    </li>
-                    <li class="nav-item p-2">
-                      <a class="nav-link" href="uusi.html">Uusi</a>
-                    </li>
-                    <li class="nav-item p-2">
-                      <a class="nav-link" href="poista.html">Poista</a>
-                    </li>
-                    <li class="nav-item p-2">
-                      <a class="nav-link" href="ohje.html">Ohje</a>
-                    </li>
-                  </ul>
-                </div>
-              </nav
+              <h3 class="masthead-brand">alueet.net</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                    <li><a href="uusi.html">Uusi</a></li>
+                    <li><a href="poista.html">Poista</a></li>
+                    <li><a href="alueet.html">Alueet</a></li>
+                </ul>
+              </nav>
             </div>
-          </header>
+          </div>
 
-          <main role="main" class="inner cover">
+          <div class="inner cover">
             <h1 class="cover-heading">Muistiinpanot kosketusnäytöllä</h1>
-            <p class="lead mb-4">Värikoodit, joiden merkityksen sinä päätät.</p>
-            <p class="lead">
-              <a href="uusi.html" class="btn btn-lg text-white btn-outline-light">Tee uusi alue</a>
-            </p>
-            <p class="lead">
-              <a href="selaa.html" class="btn btn-lg text-white btn-outline-light">Selaa alueita</a>
-            </p>
-            <p class="lead">
-              <a href="v13/index.html" class="btn btn-lg text-white btn-outline-light">Versio 1.3</a>
-            </p>
-          </main>
+            <p class="lead">Värikoodit, joiden merkityksen sinä päätät.</p>
 
-          <footer class="mastfoot">
+
+            <p class="lead">
+              <a href="uusi.html" class="btn btn-lg btn-default">Tee uusi alue</a>
+            </p>
+            <p class="lead">
+              <a href="alueet.html" class="btn btn-lg btn-default">Selaa alueita</a>
+            </p>
+          </div>
+
+          <div class="mastfoot">
             <div class="inner">
               <p><strong>Välimuistin tyhjennys poistaa alueet</strong></p>
               <p>sami.pyy@gmail.com (1.4)</p>
             </div>
-          </footer>
+          </div>
 
         </div>
 
@@ -74,12 +60,5 @@
 
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
-
-</body></html>
+  </body>
+</html>

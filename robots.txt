@@ -1,6 +1,6 @@
 User-agent: *
 Disallow: /js/
-Disallow: /css/
+Disallow: /bootstrap/
 Disallow: /v13/
 Disallow: /selaa.html
 Disallow: /alue.html

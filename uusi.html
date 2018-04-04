@@ -1,92 +1,64 @@
 <!DOCTYPE html>
-<html lang="fi">
+
+<html lang="fi" manifest="alueet.net.appcache">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Kenttäpalvelus</title>
+    <link rel="icon" href="favicon.ico">
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <title>Alueet</title>
 
-    <!-- Custom styles for this template -->
-    <link href="css/alueet.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/cover.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="js/storage.js"></script>
   </head>
 
   <body>
+
     <div class="site-wrapper">
+
       <div class="site-wrapper-inner">
+
         <div class="cover-container">
-          <header class="masthead clearfix">
+
+          <div class="masthead clearfix">
             <div class="inner">
-              <nav class="navbar navbar-expand-sm navbar-dark" >
-                <h3 class="masthead-brand">alueet.net</h3>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                  <ul class="navbar-nav nav-masthead ml-auto">
-                    <li class="nav-item p-2">
-                      <a class="nav-link" href="selaa.html">Selaa</a>
-                    </li>
-                    <li class="nav-item p-2 active">
-                      <a class="nav-link" href="uusi.html">Uusi</a>
-                    </li>
-                    <li class="nav-item p-2">
-                      <a class="nav-link" href="poista.html">Poista</a>
-                    </li>
-                    <li class="nav-item p-2">
-                      <a class="nav-link" href="ohje.html">Ohje</a>
-                    </li>
-                  </ul>
+              <h3 class="masthead-brand">alueet.net</h3>
+              <nav>
+                <ul class="nav masthead-nav">
+                    <li class="active"><a href="#">Uusi</a></li>
+                    <li><a href="poista.html">Poista</a></li>
+                    <li><a href="alueet.html">Alueet</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <form>
+                <div class="form-group">
+                  <label for="name" class="control-label lead">Alueen nimi:</label>
+                  <input type="text" class="form-control" id="name" placeholder="tie, rivitalo tai kerrostalo">
                 </div>
-              </nav
-            </div>
-          </header>
-
-          <main role="main" class="inner cover">
-            <div class="card text-white text-center bg-alueet border-dark">
-              <div class="card-header text-center">
-                Uusi alue
-              </div>
-              <div class="card-body">
-                <form>
                   <div class="form-group">
-                    <label for="name" class="control-label">Nimi</label>
-                    <input type="text" class="form-control" id="name" placeholder="tie, rivitalo tai kerrostalo">
-                  </div>
-                    <div class="form-group">
-                    <label for="from" class="control-label">Numerosta</label>
-                    <input type="number" class="form-control" id="from" min="1" max="222" value="1">
-                  </div>
-                  <div class="form-group">
-                    <label for="to" class="control-label">Numeroon</label>
-                    <input type="number" class="form-control" id="to" min="1" max="222" value="1">
-                  </div>
-                </form>
-                <button class="btn text-white btn-outline-light mt-2" onclick="talleta()">Talleta alue</button>
-              </div>
-            </div>
-
-          </main>
+                  <label for="from" class="control-label lead">Numerosta:</label>
+                  <input type="number" class="form-control" id="from" min="1" max="222" value="1">
+                </div>
+                <div class="form-group">
+                  <label for="to" class="control-label lead">Numeroon:</label>
+                  <input type="number" class="form-control" id="to" min="1" max="222" value="1">
+                </div>
+              </form>
+              <button class="btn btn-lg btn-default" onclick="talleta()">Talleta alue</button>
+          </div>
 
         </div>
 
       </div>
 
     </div>
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
-
-    <script type="text/javascript" src="js/storage.js"></script>
 
     <script type="text/javascript">
       function talleta() {
@@ -96,7 +68,7 @@
 
         if (name) {
           var area = window.createArea(name, from, to);
-          window.setSelectedArea(area.key);
+          window.setSelectedArea(area);
           window.location.assign('alue.html');
         } else {
           window.alert('Anna alueen nimi');
