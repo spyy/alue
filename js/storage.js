@@ -1,5 +1,26 @@
 
+function createArea2(name, from, to) {
+    var area = {
+      name: name,
+      from: from,
+      to: to,
+      doors:[],
+      createdAt: Date.now(),
+      updatedAt: Date.now()
+    };
 
+    var i;
+    for (i = from; i <= Number(to); i++) {
+        area.doors.push({
+          name: '',
+          note: '',
+          code: 'empty',
+          updatedAt: Date.now()
+        });
+    }
+
+    window.localStorage.setItem(name, JSON.stringify(area));
+}
 
 
 function createArea(name, from, to) {
@@ -22,19 +43,26 @@ function removeArea(area) {
 }
 
 
+function removeArea2(keyName) {
+    if (window.localStorage.getItem(keyName) !== null) {
+        window.localStorage.removeItem(keyName);
+    }
+}
+
+
 function getAreaName(key) {
     return window.localStorage.getItem(key);
 }
 
 
 function getAreaFrom(area) {
-    var key = area + '_from'
+    var key = area + '_from';
     return window.localStorage.getItem(key);
 }
 
 
 function getAreaTo(area) {
-    var key = area + '_to'
+    var key = area + '_to';
     return window.localStorage.getItem(key);
 }
 
@@ -66,7 +94,7 @@ function getAreas() {
     for (i = 0; i < window.localStorage.length; i++) {
         var key = window.localStorage.key(i);
 
-        if (key.search(/[._]/g) === -1) {
+        if (key.search(/_/) === -1 && Number.isInteger(Number(key))) {
             res.push(key);
         }
     }
@@ -90,6 +118,33 @@ function setDoor(area, door, color) {
     var value = color + ' ' + getDateAndTime() + ' ' + getWeekDay();
 
     window.localStorage.setItem(key, value);
+}
+
+
+function setDoor2(keyName, door, code) {
+    keyName = window.localStorage.getItem(keyName);
+    if (window.localStorage.getItem(keyName) === null) {
+        return;
+    }
+
+    var area = getArea(keyName);
+    var index = door - area.from;
+    var door = area.doors[index];
+
+    door.updatedAt = Date.now();
+    door.code = code;
+
+    area.updatedAt = door.updatedAt;
+    area.doors[index] = door;
+
+    window.localStorage.setItem(keyName, JSON.stringify(area));
+}
+
+
+function getArea(keyName) {
+    var area = window.localStorage.getItem(keyName);
+
+    return JSON.parse(area);
 }
 
 
