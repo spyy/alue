@@ -1,0 +1,19 @@
+CACHE MANIFEST
+# v1.4 - 2018-08-14
+
+CACHE:
+bootstrap/css/bootstrap.min.css
+bootstrap/css/cover.css
+bootstrap/css/cover2.css
+bootstrap/js/bootstrap.min.js
+js/storage.js
+js/jquery.min.js
+alue.html
+alueet.html
+favicon.ico
+index.html
+poista.html
+uusi.html
+
+FALLBACK:
+/ index.html

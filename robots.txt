@@ -1,6 +1,7 @@
 User-agent: *
 Disallow: /js/
-Disallow: /bootstrap/
+Disallow: /css/
+Disallow: /v1/
 Disallow: /alueet.html
 Disallow: /alue.html
 Disallow: /poista.html
