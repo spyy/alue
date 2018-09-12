@@ -32,14 +32,9 @@ body {
 
 body {
   display: -ms-flexbox;
-  display: -webkit-box;
   display: flex;
-  -ms-flex-pack: center;
-  -webkit-box-pack: center;
-  justify-content: center;
   color: #fff;
   text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
-  
 }
 
 .cover-container {
@@ -98,7 +93,7 @@ body {
 }
 .cover .btn-lg {
   padding: .75rem 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 
@@ -111,40 +106,9 @@ body {
 
 
 /*
- * Affix and center
+ * Alueet customization
  */
 
-@media (min-width: 40em) {
-  /* Pull out the header and footer */
-  .masthead {
-    position: fixed;
-    top: 0;
-  }
-  .mastfoot {
-    position: fixed;
-    bottom: 0;
-  }
-
-  /* Start the vertical centering */
-  .site-wrapper-inner {
-    vertical-align: middle;
-  }
-
-  /* Handle the widths */
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 100%; /* Must be percentage or pixels for horizontal alignment */
-  }
-}
-
-@media (min-width: 62em) {
-  .masthead,
-  .mastfoot,
-  .cover-container {
-    width: 42rem;
-  }
-}
 
 .bg-alueet {
     background-color: #413D99
