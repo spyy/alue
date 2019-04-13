@@ -1,4 +1,5 @@
 User-agent: *
+Disallow: /v2/
 Disallow: /js/
 Disallow: /bootstrap/
 Disallow: /alueet.html

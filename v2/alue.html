@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html lang="fi">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <title>Kenttäpalvelus</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Custom styles -->
+    <link href="css/alueet.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-5">
+        <div class="inner">
+          <h3 class="masthead-brand">alueet.net</h3>
+          <nav class="nav nav-masthead justify-content-center p-2">
+            <a class="nav-link" href="selaa.html">Selaa</a>
+            <a class="nav-link" href="uusi.html">Uusi</a>
+            <a class="nav-link" href="poista.html">Poista</a>
+          </nav>
+        </div>
+      </header>
+
+      <main role="main" class="inner">
+        <div class="list-group lead list-group-flush" id="alue">
+          <!-- filled in script -->
+        </div>
+      </main>
+
+      <footer class="mastfoot mt-5">
+        <div class="inner">
+          <p>Välimuistin tyhjennys poistaa alueet, sami.pyy@gmail.com (2.0).</p>
+        </div>
+      </footer>
+
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" style="color:#325e60"></h4>
+          </div>
+          <div class="modal-body">
+            <form>
+                <div class="form-group">
+                  <textarea class="form-control" rows="2"></textarea>
+                </div>
+            </form>
+            <hr />
+            <button type="button" class="btn btn-success btn-block btn-lg" onclick="merkkaa('list-group-item-success')">Vihreä</button>
+            <button type="button" class="btn btn-danger btn-block btn-lg" onclick="merkkaa('list-group-item-danger')">Punainen</button>
+            <button type="button" class="btn btn-warning btn-block btn-lg" onclick="merkkaa('list-group-item-warning')">Keltainen</button>
+            <button type="button" class="btn btn-info btn-block btn-lg" onclick="merkkaa('list-group-item-info')">Sininen</button>
+            <button type="button" class="btn btn-dark btn-block btn-lg" onclick="merkkaa('list-group-item-dark')">Tumma</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-block btn-lg" data-dismiss="modal">Sulje</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="js/storage.js"></script>
+
+    <script>
+
+        if (window.getSelectedArea()) {
+            window.selectedArea = window.getArea(window.getSelectedArea());
+            printArea(window.selectedArea);
+        } else {
+            window.location.assign('index.html');
+        }
+
+        function printArea(area) {
+            //console.log(area);
+            //var inner = '<a href="#" class="list-group-item active">' + area.name + '</a>';
+            var inner = '<button type="button" class="list-group-item list-group-item-action active text-left">' + area.name + '</button>'
+
+            var num = Number(area.from);
+            for (var i=0; num<=Number(area.to); i++, num++) {
+              var door = area.doors[i];
+              var classValue = 'list-group-item list-group-item-action d-flex justify-content-between align-items-center ' + door.code;
+              var span = '';
+              var text = '';
+              var note = '';
+
+              if (door.code !== 'empty') {
+                var date = new Date(door.updatedAt);
+                var weekDay = window.getWeekDay(date);
+                var dayAndTime = window.getDateAndTime(date);
+
+                span = '<span class="badge badge-primary badge-light">' + dayAndTime + ' ' + weekDay + '</span>';
+              } else {
+                classValue += ' list-group-item-none';
+              }
+
+              if (door.note) {
+                text = ' ' + door.note;
+                note = door.note;
+              }
+
+              //inner += '<button type="button" class="' + classValue + '" onclick="showModal(' + i + ');return false;">' + num + span + '</button>';
+              inner += '<button type="button" class="' + classValue + '" text-white data-toggle="modal" data-target="#myModal" data-door="' + num + '" data-door-index="' + i + '" data-door-note="' + note + '">' + num + text.substring(0, 11) + span + '</button>';
+            }
+
+            document.getElementById("alue").innerHTML = inner;
+        }
+
+        function merkkaa(color) {
+            window.merkattu = true;
+
+            var i = window.selectedDoorIndex;
+            window.selectedArea.doors[i].code = color;
+
+            $('#myModal').modal('hide');
+        }
+
+        $('#myModal').on('show.bs.modal', function (event) {
+            window.merkattu = false;
+
+            var button = $(event.relatedTarget);
+            window.selectedDoorIndex = button.data('door-index');
+
+            var modal = $(this);
+            modal.find('.modal-title').text('Asunto ' + button.data('door'));
+            modal.find('.modal-body textarea').val(button.data('door-note'));
+        });
+
+        $('#myModal').on('hide.bs.modal', function (event) {
+            console.log(event);
+
+            // talleta jos tarvii
+            if (window.merkattu) {
+                var area = window.selectedArea;
+                var modal = $(this);
+                var i = window.selectedDoorIndex;
+
+                area.doors[i].note = modal.find('.modal-body textarea').val();
+                window.localStorage.setItem(area.name, JSON.stringify(area));
+            }
+        });
+
+        $('#myModal').on('hidden.bs.modal', function (event) {
+            console.log(event);
+
+            printArea(window.selectedArea);
+        });
+
+    </script>
+
+  </body>
+</html>
