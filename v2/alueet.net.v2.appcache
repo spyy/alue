@@ -1,0 +1,14 @@
+CACHE MANIFEST
+# v2.0 - 2019-04-13
+
+CACHE:
+css/alueet.css
+js/storage.js
+alue.html
+selaa.html
+index.html
+poista.html
+uusi.html
+
+FALLBACK:
+/ index.html
