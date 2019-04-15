@@ -88,7 +88,7 @@
         function printArea(area) {
             //console.log(area);
             //var inner = '<a href="#" class="list-group-item active">' + area.name + '</a>';
-            var inner = '<button type="button" class="list-group-item list-group-item-action active text-left">' + area.name + '</button>'
+            var inner = '<button type="button" class="list-group-item list-group-item-action active text-left"><h4 class="mb-0">' + area.name + '</h4></button>'
 
             var num = Number(area.from);
             for (var i=0; num<=Number(area.to); i++, num++) {
@@ -103,7 +103,7 @@
                 var weekDay = window.getWeekDay(date);
                 var dayAndTime = window.getDateAndTime(date);
 
-                span = '<span class="badge badge-primary badge-light">' + dayAndTime + ' ' + weekDay + '</span>';
+                span = '<h4 class="mb-0"><span class="badge badge-primary badge-light">' + dayAndTime + ' ' + weekDay + '</span></h4>';
               } else {
                 classValue += ' list-group-item-none';
               }
@@ -123,7 +123,7 @@
             window.merkattu = true;
 
             var i = window.selectedDoorIndex;
-            window.selectedArea.doors[i].code = color;            
+            window.selectedArea.doors[i].code = color;
 
             $('#myModal').modal('hide');
         }
