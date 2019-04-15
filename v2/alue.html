@@ -31,7 +31,7 @@
         </div>
       </header>
 
-      <main role="main" class="inner">
+      <main role="main" class="inner cover">
         <div class="list-group lead list-group-flush" id="alue">
           <!-- filled in script -->
         </div>
@@ -52,13 +52,7 @@
           <div class="modal-header">
             <h4 class="modal-title" style="color:#325e60"></h4>
           </div>
-          <div class="modal-body">
-            <form>
-                <div class="form-group">
-                  <textarea class="form-control" rows="2"></textarea>
-                </div>
-            </form>
-            <hr />
+          <div class="modal-body">            
             <button type="button" class="btn btn-success btn-block btn-lg" onclick="merkkaa('list-group-item-success')">Vihreä</button>
             <button type="button" class="btn btn-danger btn-block btn-lg" onclick="merkkaa('list-group-item-danger')">Punainen</button>
             <button type="button" class="btn btn-warning btn-block btn-lg" onclick="merkkaa('list-group-item-warning')">Keltainen</button>
@@ -119,7 +113,6 @@
                 note = door.note;
               }
 
-              //inner += '<button type="button" class="' + classValue + '" onclick="showModal(' + i + ');return false;">' + num + span + '</button>';
               inner += '<button type="button" class="' + classValue + '" text-white data-toggle="modal" data-target="#myModal" data-door="' + num + '" data-door-index="' + i + '" data-door-note="' + note + '">' + num + text.substring(0, 11) + span + '</button>';
             }
 
@@ -130,7 +123,7 @@
             window.merkattu = true;
 
             var i = window.selectedDoorIndex;
-            window.selectedArea.doors[i].code = color;
+            window.selectedArea.doors[i].code = color;            
 
             $('#myModal').modal('hide');
         }
@@ -143,21 +136,19 @@
 
             var modal = $(this);
             modal.find('.modal-title').text('Asunto ' + button.data('door'));
-            modal.find('.modal-body textarea').val(button.data('door-note'));
         });
 
         $('#myModal').on('hide.bs.modal', function (event) {
-            console.log(event);
+          console.log(event);
 
-            // talleta jos tarvii
-            if (window.merkattu) {
-                var area = window.selectedArea;
-                var modal = $(this);
-                var i = window.selectedDoorIndex;
+          // talleta jos tarvii
+          if (window.merkattu) {
+            var area = window.selectedArea;
 
-                area.doors[i].note = modal.find('.modal-body textarea').val();
-                window.localStorage.setItem(area.name, JSON.stringify(area));
-            }
+            area.doors[window.selectedDoorIndex].updatedAt = event.timeStamp;
+
+            window.localStorage.setItem(area.name, JSON.stringify(area));
+          }
         });
 
         $('#myModal').on('hidden.bs.modal', function (event) {
