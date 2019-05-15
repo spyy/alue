@@ -1,56 +1,63 @@
 <!DOCTYPE html>
-<html lang="fi" manifest="alueet.net.appcache">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="favicon.ico">
+<html lang="fi">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
     <title>Alueet</title>
 
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="bootstrap/css/cover2.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <script type="text/javascript" src="js/storage.js"></script>
+    <!-- Custom styles -->
+    <link href="css/alueet.css" rel="stylesheet">
   </head>
 
-  <body>
-    <div class="site-wrapper">
-      <div class="site-wrapper-inner">
-        <div class="cover-container">
-          <div class="masthead">
-            <div class="inner">
-              <h3 class="masthead-brand" id="brand">alueet.net</h3>
-              <nav>
-                <ul class="nav masthead-nav">
-                  <li><a href="uusi.html">Uusi</a></li>
-                  <li><a href="poista.html">Poista</a></li>
-                  <li><a href="alueet.html">Alueet</a></li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-          <div class="inner cover">
-            <div class="list-group lead text-left" id="alueet">
-              <!-- filled in script -->
-            </div>
-          </div>
+  <body class="text-center">
+
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-5">
+        <div class="inner">
+          <h3 class="masthead-brand">alueet.net</h3>
+          <nav class="nav nav-masthead justify-content-center p-2">
+            <a class="nav-link" href="selaa.html">Selaa</a>
+            <a class="nav-link" href="uusi.html">Uusi</a>
+            <a class="nav-link" href="poista.html">Poista</a>
+          </nav>
         </div>
-      </div>
+      </header>
+
+      <main role="main" class="inner">
+        <div class="list-group lead" id="alue">
+          <!-- filled in script -->
+        </div>
+      </main>
+
+      <footer class="mastfoot mt-5">
+        <div class="inner">
+          <p>Välimuistin tyhjennys poistaa alueet, sami.pyy@gmail.com (2.0).</p>
+        </div>
+      </footer>
+
     </div>
 
     <!-- Modal -->
-    <div class="modal fade bs-example-modal-sm" id="myModal">
-      <div class="modal-dialog modal-sm">
+    <div class="modal fade" id="myModal">
+      <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title" id="otsikko" style="color:#325e60"></h4>
+            <h4 class="modal-title" style="color:#325e60"></h4>
           </div>
-          <div class="modal-body">
+          <div class="modal-body">            
             <button type="button" class="btn btn-success btn-block btn-lg" onclick="merkkaa('list-group-item-success')">Vihreä</button>
             <button type="button" class="btn btn-danger btn-block btn-lg" onclick="merkkaa('list-group-item-danger')">Punainen</button>
             <button type="button" class="btn btn-warning btn-block btn-lg" onclick="merkkaa('list-group-item-warning')">Keltainen</button>
             <button type="button" class="btn btn-info btn-block btn-lg" onclick="merkkaa('list-group-item-info')">Sininen</button>
+            <button type="button" class="btn btn-dark btn-block btn-lg" onclick="merkkaa('list-group-item-dark')">Tumma</button>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default btn-block btn-lg" data-dismiss="modal">Sulje</button>
@@ -59,57 +66,98 @@
       </div>
     </div>
 
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="js/storage.js"></script>
+
     <script>
-      window.selectedDoor = 0;
-      window.selectedArea = window.getSelectedArea();
 
-      if (window.selectedArea) {
-        printArea(window.selectedArea);
-      } else {
-        window.location.assign('index.html');
-      }
-
-      function printArea(area) {
-        var from = window.getAreaFrom(area);
-        var to = window.getAreaTo(area);
-        var areaName = window.getAreaName(area);
-        var inner = '<a href="#" class="list-group-item active">' + areaName + '</a>';
-        var i;
-        for (i = Number(from); i <= Number(to); i++) {
-          var item = window.getDoor(window.selectedArea, i);
-
-          if (item === 'empty') {
-            inner += '<button type="button" class="list-group-item ' + item + '" onclick="showModal(' + i + ');return false;">' + i + '</button>';
-          } else {
-            var values = item.split(' ');
-            var color = values[0];
-            var date = values[1];
-            var time = values[2];
-            var weekDay = values[3];
-            var content = i + '<span class="badge">' + date + ' ' + time + ' ' + weekDay + '</span>';
-            inner += '<button type="button" class="list-group-item ' + color + '" onclick="showModal(' + i + ');return false;">' + content + '</button>';
-          }
+        if (window.getSelectedArea()) {
+            window.selectedArea = window.getArea(window.getSelectedArea());
+            printArea(window.selectedArea);
+        } else {
+            window.location.assign('index.html');
         }
 
-        document.getElementById("alueet").innerHTML += inner;
-      }
+        function printArea(area) {
+            //console.log(area);
+            //var inner = '<a href="#" class="list-group-item active">' + area.name + '</a>';
+            var inner = '<button type="button" class="list-group-item active text-left"><h4 class="mb-0">' + area.name + '</h4></button>'
 
-      function showModal(door) {
-        window.selectedDoor = door;
-        document.getElementById('otsikko').innerHTML = 'Asunto ' + window.selectedDoor;
-        $('#myModal').modal('show');
-      }
+            var num = Number(area.from);
+            for (var i=0; num<=Number(area.to); i++, num++) {
+              var door = area.doors[i];
+              var classValue = 'list-group-item d-flex justify-content-between align-items-center ' + door.code;
+              var span = '';
+              var text = '';
+              var note = '';
 
-      function merkkaa(color) {
-        window.setDoor(window.selectedArea, window.selectedDoor, color);
-        window.setDoor2(window.selectedArea, window.selectedDoor, color);
-        window.location.reload(false);
-      }
+              if (door.code !== 'empty') {
+                var date = new Date(door.updatedAt);
+                var weekDay = window.getWeekDay(date);
+                var dayAndTime = window.getDateAndTime(date);
+
+                span = '<h4 class="mb-0"><span class="badge badge-secondary">' + dayAndTime + ' ' + weekDay + '</span></h4>';
+              } else {
+                classValue += ' list-group-item-none';
+              }
+
+              if (door.note) {
+                text = ' ' + door.note;
+                note = door.note;
+              }
+
+              inner += '<button type="button" class="' + classValue + '" text-white data-toggle="modal" data-target="#myModal" data-door="' + num + '" data-door-index="' + i + '" data-door-note="' + note + '">' + num + text.substring(0, 11) + span + '</button>';
+            }
+
+            document.getElementById("alue").innerHTML = inner;
+        }
+
+        function merkkaa(color) {
+            window.merkattu = true;
+
+            var i = window.selectedDoorIndex;
+            window.selectedArea.doors[i].code = color;
+
+            $('#myModal').modal('hide');
+        }
+
+        $('#myModal').on('show.bs.modal', function (event) {
+            window.merkattu = false;
+
+            var button = $(event.relatedTarget);
+            window.selectedDoorIndex = button.data('door-index');
+
+            var modal = $(this);
+            modal.find('.modal-title').text('Asunto ' + button.data('door'));
+        });
+
+        $('#myModal').on('hide.bs.modal', function (event) {
+          console.log(event);
+
+          // talleta jos tarvii
+          if (window.merkattu) {
+            var area = window.selectedArea;
+
+            area.doors[window.selectedDoorIndex].updatedAt = event.timeStamp;
+
+            window.localStorage.setItem(area.name, JSON.stringify(area));
+          }
+        });
+
+        $('#myModal').on('hidden.bs.modal', function (event) {
+            console.log(event);
+
+            printArea(window.selectedArea);
+        });
+
     </script>
-
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
 
   </body>
 </html>

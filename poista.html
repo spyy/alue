@@ -1,49 +1,41 @@
 <!DOCTYPE html>
-<html lang="fi" manifest="alueet.net.appcache">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="icon" href="favicon.ico">
+<html lang="fi">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico">
 
     <title>Alueet</title>
 
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="bootstrap/css/cover2.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <script type="text/javascript" src="js/storage.js"></script>
+    <!-- Custom styles -->
+    <link href="css/alueet.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body class="text-center">
 
-    <div class="site-wrapper">
-
-      <div class="site-wrapper-inner">
-
-        <div class="cover-container">
-
-          <div class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">alueet.net</h3>
-              <nav>
-                <ul class="nav masthead-nav">
-                  <li><a href="uusi.html">Uusi</a></li>
-                  <li class="active"><a href="#">Poista</a></li>
-                  <li><a href="alueet.html">Alueet</a></li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-
-          <div class="inner cover">
-                <div class="lead" id="alueet">
-                    <!-- filled by script -->
-                </div>
-          </div>
-
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-5">
+        <div class="inner">
+          <h3 class="masthead-brand">alueet.net</h3>
+          <nav class="nav nav-masthead justify-content-center p-2">
+            <a class="nav-link" href="selaa.html">Selaa</a>
+            <a class="nav-link" href="uusi.html">Uusi</a>
+            <a class="nav-link active" href="poista.html">Poista</a>
+          </nav>
         </div>
+      </header>
 
-      </div>
+      <main role="main" class="inner cover">
+        <div id="alueet">
+          <!-- filled by script -->          
+        </div>
+      </main>
 
     </div>
 
@@ -62,40 +54,37 @@
       </div>
     </div>
 
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="js/storage.js"></script>
 
     <script>
-      window.selectedArea = null;
-
       var innerHTML = '';
-      var areas = window.getAreas();
 
-      var i;
-      for (i = 0; i < areas.length; i++) {
-        var area = areas[i];
-        var name = window.getAreaName(areas[i]);
-        innerHTML += '<p><button type="button" class="btn btn-default btn-lg" onclick="valitse(' + area + ')">' + name + '</button></p>';
-      }
+      areas = window.getAreas();
+      areas.forEach(function(item) {
+        var area = JSON.parse(item);
+        innerHTML += '<p class="lead"><button type="button" class="btn btn-lg text-white btn-outline-light" onclick="valitse(\'' + area.name + '\')">' + area.name + '</button></p>';
+      });
 
-      document.getElementById('alueet').innerHTML = innerHTML;
+      document.getElementById('alueet').innerHTML = innerHTML;      
 
       function valitse(area) {
-          window.selectedArea = area;
-          var areaName = window.getAreaName(area);
-          document.getElementById('otsikko').innerHTML = 'Poista ' + areaName;
-          $('#myModal').modal('show');
+        window.setSelectedArea(area);
+        document.getElementById('otsikko').innerHTML = 'Poista ' + area;
+        $('#myModal').modal('show');
       }
 
       function poista() {
-        var areaName = window.getAreaName(window.selectedArea);
-        window.removeArea2(areaName);
-        window.removeArea(window.selectedArea);
+        var area = window.getSelectedArea();
+        window.removeArea(area);
         window.location.reload(false);
       }
-    </script>
-
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="js/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    </script>    
 
   </body>
 </html>
