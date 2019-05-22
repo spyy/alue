@@ -16,6 +16,6 @@
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
     "start_url": "http://www.alueet.net/index.html",
-    "display": "standalone",
+    "display": "fullscreen",
     "orientation": "portrait"
 }
